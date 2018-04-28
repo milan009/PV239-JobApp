@@ -19,5 +19,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Address.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BasicObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Company.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Contact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Interview.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Validators\EmailValidatorBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Validators\EntryLengthValidatorBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />
   </ItemGroup>
 </Project>
