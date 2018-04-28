@@ -2,7 +2,7 @@
 
 namespace JobApp.Models
 {
-    class Interview : BasicObject
+    public class Interview : BasicObject
     {
         // parameters
 

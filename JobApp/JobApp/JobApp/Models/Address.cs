@@ -2,7 +2,7 @@
 
 namespace JobApp.Models
 {
-    class Address : BasicObject
+    public class Address : BasicObject
     {
         // parameters
 

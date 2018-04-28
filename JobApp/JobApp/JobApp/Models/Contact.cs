@@ -2,7 +2,7 @@
 
 namespace JobApp.Models
 {
-    class Contact : BasicObject
+    public class Contact : BasicObject
     {
         // parameters
 

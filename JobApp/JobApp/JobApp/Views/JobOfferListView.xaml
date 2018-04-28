@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobApp.Views.JobOfferListView">
+  <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Text="Moje pracovné ponuky"
+                   Grid.Row="0"
+                   BackgroundColor="DarkGray"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <!-- categories -->
+            <ListView ItemsSource="{Binding JobOffers}" Grid.Row="1">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete"
+                                        IsDestructive="True"
+                                        Command="{Binding BindingContext.DeleteJobOfferCommand, Source={x:Reference Root}}"
+                                        CommandParameter="{Binding}" />
+                            </ViewCell.ContextActions>
+                            <Grid Margin="{StaticResource DefaultPadding}">
+                                <Label
+                                  Text="{Binding Position, Mode=OneWay}"
+                                  VerticalOptions="Center"
+                                  FontSize="Large" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

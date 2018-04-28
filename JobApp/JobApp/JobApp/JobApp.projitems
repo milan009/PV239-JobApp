@@ -24,8 +24,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Company.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Contact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Interview.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\JobOffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EmailValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EntryLengthValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\JobOfferListView.xaml.cs">
+      <DependentUpon>JobOfferListView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JobOfferListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

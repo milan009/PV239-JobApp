@@ -1,7 +1,7 @@
 ﻿
 namespace JobApp.Models
 {
-    class BasicObject
+    public class BasicObject
     {
         // parameters
 

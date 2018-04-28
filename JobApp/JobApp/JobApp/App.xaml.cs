@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
+﻿using JobApp.Views;
 using Xamarin.Forms;
 
 namespace JobApp
@@ -13,7 +9,7 @@ namespace JobApp
 		{
 			InitializeComponent();
 
-			MainPage = new JobApp.MainPage();
+			base.MainPage = new NavigationPage(new JobOfferListView());
 		}
 
 		protected override void OnStart ()
