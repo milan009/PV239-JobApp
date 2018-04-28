@@ -7,7 +7,7 @@ namespace JobApp.Models
         // parameters
 
         //TO DO: Obmedzit dlzku na 50 znakov
-        public String Street { get; set; }
+        public String Street { get; set; }          //pridavam random koment, aby som videl, ako sa bude spravat visual studio
 
         //TO DO: Obmedzit dlzku na 10 znakov
         public String Number { get; set; }
