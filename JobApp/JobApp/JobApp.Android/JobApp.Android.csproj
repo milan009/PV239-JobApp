@@ -79,6 +79,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\XamarinToolkit\XamarinToolkit.csproj">
+      <Project>{6e7f5541-90c8-407c-8843-0546ca7d69eb}</Project>
+      <Name>XamarinToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\JobApp\JobApp.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

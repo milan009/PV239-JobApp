@@ -1,25 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JobApp.Views.JobOfferListView">
+             x:Class="JobApp.Views.JobOfferListView"
+             Title="Moje pracovné ponuky">
   <ContentPage.Content>
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-            <Label Text="Moje pracovné ponuky"
-                   Grid.Row="0"
-                   BackgroundColor="DarkGray"
-                   FontSize="Large"
-                   VerticalOptions="Center"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"/>
 
             <!-- categories -->
-            <ListView ItemsSource="{Binding JobOffers}" Grid.Row="1">
+            <ListView ItemsSource="{Binding JobOffers}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -39,6 +32,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
+            <!-- TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom-->
+            <Button Grid.Row="1"
+                    Text="Pridať"
+                    Pressed="Button_OnPressed"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
