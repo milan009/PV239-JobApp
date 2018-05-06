@@ -4,6 +4,47 @@
              x:Class="JobApp.Views.ContactDetailView"
              Title="Tu bude názov firmy - kontakt">
     <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
+            <Label Text="Meno" 
+                   Grid.Row="0" 
+                   Grid.Column="0"/>
+            <Entry Text="Meno"
+                   Grid.Row="0" 
+                   Grid.Column="1"/>
+
+            <Label Text="Priezvisko" 
+                   Grid.Row="1" 
+                   Grid.Column="0"/>
+            <Entry Text="Priezvisko"
+                   Grid.Row="1" 
+                   Grid.Column="1"/>
+
+            <Label Text="Mail" 
+                   Grid.Row="2" 
+                   Grid.Column="0"/>
+            <Entry Text="meno.priezvisko@muni.cz"
+                   Keyboard="Email"
+                   Grid.Row="2" 
+                   Grid.Column="1"/>
+
+            <Label Text="Telefón" 
+                   Grid.Row="3" 
+                   Grid.Column="0"/>
+            <Entry Text="+420123456789"
+                   Keyboard="Telephone"
+                   Grid.Row="3" 
+                   Grid.Column="1"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

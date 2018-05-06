@@ -28,10 +28,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EmailValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EntryLengthValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ContactDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterviewDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterviewListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ContactDetailView.xaml.cs">
       <DependentUpon>ContactDetailView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterviewDetailView.xaml.cs">
+      <DependentUpon>InterviewDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\InterviewListView.xaml.cs">
@@ -67,6 +74,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\InterviewListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\InterviewDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

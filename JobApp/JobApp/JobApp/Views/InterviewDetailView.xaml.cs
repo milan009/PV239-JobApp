@@ -5,11 +5,11 @@ using Xamarin.Forms.Xaml;
 namespace JobApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ContactDetailView : ContentPage
+	public partial class InterviewDetailView : ContentPage
 	{
-        public ContactDetailViewModel ViewModel { get; set; } = new ContactDetailViewModel();
+        public InterviewDetailViewModel ViewModel { get; set; } = new InterviewDetailViewModel();
 
-		public ContactDetailView ()
+		public InterviewDetailView ()
 		{
 			InitializeComponent ();
 		}
