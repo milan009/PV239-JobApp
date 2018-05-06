@@ -30,6 +30,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ContactDetailView.xaml.cs">
+      <DependentUpon>ContactDetailView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterviewListView.xaml.cs">
+      <DependentUpon>InterviewListView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\JobOfferDetailView.xaml.cs">
       <DependentUpon>JobOfferDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -47,6 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\JobOfferDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ContactDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\InterviewListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

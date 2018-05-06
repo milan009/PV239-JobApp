@@ -16,5 +16,15 @@ namespace JobApp.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+	    private void Contact_OnPressed(object sender, EventArgs e)
+	    {
+	        Navigation.PushAsync(new ContactDetailView(), true);
+	    }
+
+	    private void Interview_OnPressed(object sender, EventArgs e)
+	    {
+	        Navigation.PushAsync(new InterviewListView(), true);
+	    }
+    }
 }

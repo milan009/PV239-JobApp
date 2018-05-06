@@ -17,7 +17,7 @@ namespace JobApp.Views
         //TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom
 	    private void Button_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new NavigationPage(new JobOfferDetailView()), true);
+	        Navigation.PushAsync(new JobOfferDetailView(), true);
 	    }
 	}
 }
