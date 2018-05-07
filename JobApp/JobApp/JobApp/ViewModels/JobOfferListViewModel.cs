@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using JobApp.Models;
+using JobApp.Services;
 using Xamarin.Forms;
 using XamarinToolkit.Mvvm;
 
@@ -7,6 +8,7 @@ namespace JobApp.ViewModels
 {
     public class JobOfferListViewModel : ViewModelBase
     {
+        private GuidService _guidService = new GuidService();
         private ObservableCollection<JobOffer> _jobOffers = new ObservableCollection<JobOffer>();
 
         public ObservableCollection<JobOffer> JobOffers
@@ -48,8 +50,7 @@ namespace JobApp.ViewModels
             //TO DO: vytvorit novu ponuku
             var newJobOffer = new JobOffer()
             {
-                Id = new System.Guid(),
-                //Id = JobOffers.GenerateNewId(),
+                Id = _guidService.GenerateNewGuid(),
                 Position = companyName 
             };
 

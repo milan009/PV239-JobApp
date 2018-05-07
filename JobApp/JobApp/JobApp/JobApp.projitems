@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\ContactRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\InterviewRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\JobOfferRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GuidService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EmailValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EntryLengthValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />
