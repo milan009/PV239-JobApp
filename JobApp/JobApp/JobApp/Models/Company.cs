@@ -1,17 +1,16 @@
 ﻿using System;
+using SQLite;
 
 namespace JobApp.Models
 {
+    [Table("Company")]
     public class Company : BasicObject
     {
-        // parameters
-
         //TO DO: Obmedzit dlzku na 100 znakov
         public String Name { get; set; }
 
-        public Contact Contact { get; set; }
+        public Guid ContactId { get; set; }
 
-        public Address Address { get; set; }
-
+        public Guid AddressId { get; set; }
     }
 }

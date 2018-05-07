@@ -1,11 +1,11 @@
-﻿
+﻿using SQLite;
+using System;
+
 namespace JobApp.Models
 {
     public class BasicObject
     {
-        // parameters
-
-        public int Id { get; set; }
-
+        [PrimaryKey]
+        public Guid Id { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using SQLite;
 
 namespace JobApp.Models
 {
+    [Table("Contact")]
     public class Contact : BasicObject
     {
         // parameters

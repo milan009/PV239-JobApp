@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using SQLite;
 
 namespace JobApp.Models
 {
+    [Table("JobOffer")]
     public class JobOffer : BasicObject
     {
         // parameters
 
-        public Company Company { get; set; }
+        public Guid CompanyId { get; set; }
 
         public String Position { get; set; }
 
         //TO DO: mozme proste k interview priradit ID jobOffer
-        public List<Interview> Interviews { get; set; }
+        public List<Guid> InterviewsIds { get; set; }
 
         public int? OfferedPay { get; set; }
 
@@ -22,6 +23,5 @@ namespace JobApp.Models
         //TO DO: Typ uvazku
 
         public String Note { get; set; }
-
     }
 }

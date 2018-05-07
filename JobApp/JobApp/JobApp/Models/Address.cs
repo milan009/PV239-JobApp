@@ -1,7 +1,9 @@
 ﻿using System;
+using SQLite;
 
 namespace JobApp.Models
 {
+    [Table("Address")]
     public class Address : BasicObject
     {
         // parameters
@@ -23,6 +25,5 @@ namespace JobApp.Models
 
         public String AddressInfoCalculated =>
             $"{this.Street} {this.Number}, {this.PostCode} {this.City}, {this.Country}";
-
     }
 }

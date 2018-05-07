@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\DatabaseSetUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -25,6 +26,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Contact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Interview.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\JobOffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\AddressRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\CompanyRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\ContactRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\InterviewRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\JobOfferRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EmailValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\EntryLengthValidatorBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Validators\PhoneValidatorBehavior.cs" />

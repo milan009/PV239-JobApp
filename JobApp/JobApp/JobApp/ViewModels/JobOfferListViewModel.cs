@@ -48,7 +48,7 @@ namespace JobApp.ViewModels
             //TO DO: vytvorit novu ponuku
             var newJobOffer = new JobOffer()
             {
-                Id = 42,
+                Id = new System.Guid(),
                 //Id = JobOffers.GenerateNewId(),
                 Position = companyName 
             };
