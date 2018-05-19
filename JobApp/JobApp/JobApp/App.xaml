@@ -5,7 +5,10 @@
              x:Class="JobApp.App">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+		<!-- Application resource dictionary --><!--
+        <Style TargetType="Entry">
+            <Setter Property="FontSize" Value="{StaticResource CaptionStyle}"></Setter>
+        </Style>-->
 
 	</Application.Resources>
 </Application>

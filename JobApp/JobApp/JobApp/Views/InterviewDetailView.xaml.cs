@@ -1,4 +1,5 @@
-﻿using JobApp.ViewModels;
+﻿using System;
+using JobApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,11 @@ namespace JobApp.Views
 		public InterviewDetailView ()
 		{
 			InitializeComponent ();
+		}
+
+		private void Save_Action(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

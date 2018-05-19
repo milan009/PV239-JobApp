@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobApp.Views.JobOfferDetailView"
              Title="Tu bude nazov firmy">
-    <ContentPage.Content>
-        <Grid>
+	
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Text="Save" Clicked="Save_Action"/>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
+		<Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -12,10 +17,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -78,10 +83,10 @@
                    Grid.Row="5" 
                    Grid.Column="1"/>
 
-            <Editor Grid.Row="6"
+			<Editor Grid.Row="6"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"/>
 
-        </Grid>
+		</Grid>
     </ContentPage.Content>
 </ContentPage>
