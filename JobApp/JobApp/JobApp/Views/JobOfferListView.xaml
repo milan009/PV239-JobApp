@@ -4,8 +4,9 @@
              x:Class="JobApp.Views.JobOfferListView"
              Title="Moje pracovné ponuky">
 
-    <ContentPage.ToolbarItems>
-		<ToolbarItem Order="Primary" Priority="0" Text="+" Clicked="Button_OnPressed"/>
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Icon="add.png" Text="Pridať" Clicked="Button_OnPressed">
+		</ToolbarItem>
 	</ContentPage.ToolbarItems>
 
     <ContentPage.Content>

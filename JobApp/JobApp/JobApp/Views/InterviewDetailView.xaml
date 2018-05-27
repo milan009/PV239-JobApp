@@ -5,7 +5,7 @@
              Title="Detail pohovoru">
 
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Order="Primary" Priority="0" Text="Save" Clicked="Save_Action"/>
+		<ToolbarItem Order="Primary" Priority="0" Text="Save" Icon="save.png" Clicked="Save_Action"/>
 	</ContentPage.ToolbarItems>
 
 	<ContentPage.Content>
