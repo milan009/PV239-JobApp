@@ -28,5 +28,10 @@ namespace JobApp.Views
 	    {
 	        Navigation.PushAsync(new InterviewListView(), true);
 	    }
-    }
+
+	    private void Save_Action(object sender, EventArgs e)
+	    {
+	        throw new NotImplementedException();
+	    }
+	}
 }

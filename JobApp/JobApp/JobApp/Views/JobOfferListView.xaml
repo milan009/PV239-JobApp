@@ -3,12 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobApp.Views.JobOfferListView"
              Title="Moje pracovné ponuky">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Icon="add.png" Text="Pridať" Clicked="Button_OnPressed">
+		</ToolbarItem>
+	</ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
 
             <!-- list of job offers -->
             <ListView ItemsSource="{Binding JobOffers}">
@@ -31,11 +36,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
-            <!-- TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom-->
-            <Button Grid.Row="1"
-                    Text="Pridať"
-                    Pressed="Button_OnPressed"/>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

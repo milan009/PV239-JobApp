@@ -6,6 +6,9 @@
 	<Application.Resources>
 
 		<!-- Application resource dictionary -->
+		<!--<Style TargetType="Entry">
+			<Setter Property="FontSize" Value="12"/>
+        </Style>-->
 
 	</Application.Resources>
 </Application>

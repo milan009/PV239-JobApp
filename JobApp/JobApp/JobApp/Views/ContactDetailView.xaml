@@ -2,8 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JobApp.Views.ContactDetailView"
-             Title="Tu bude názov firmy - kontakt">
-    <ContentPage.Content>
+             Title="Detail kontaktu">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Text="Save" Icon="save.png" Clicked="Save_Action"/>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -12,8 +17,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <Label Text="Meno" 
