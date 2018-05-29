@@ -18,7 +18,10 @@ namespace JobApp.Shared.Models
         public String Phone { get; set; }
 
         //TO DO: Nech to je mail
-        public String Email { get; set; }
+        public String Email
+        {
+            get; set;
+        }
 
     }
 }

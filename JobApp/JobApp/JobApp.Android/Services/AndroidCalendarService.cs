@@ -56,7 +56,6 @@ namespace JobApp.Droid.Services
             DateTime starTime)
         {
             SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
-            JobApp
         }
 
         /*
@@ -132,16 +131,6 @@ namespace JobApp.Droid.Services
             {
                 Log.Error("Showcase", "exception create calendar event");
             }
-        }
-
-        List<IInterview> ICalendarService.GetEventsByDay(DateTime day)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<IInterview> ICalendarService.GetInterviewsById(Guid jobGuid)
-        {
-            throw new NotImplementedException();
         }
 
         private long PrepareTime(DateTime time)
