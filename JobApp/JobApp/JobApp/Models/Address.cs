@@ -8,6 +8,8 @@ namespace JobApp.Models
     {
         // parameters
 
+        public Guid CompanyId { get; set; }
+
         //TO DO: Obmedzit dlzku na 50 znakov
         public String Street { get; set; }
 

@@ -7,13 +7,13 @@ namespace JobApp.Models
     public class Interview : BasicObject, IInterview
     {
         // parameters
+        public Guid JobOfferId { get; set; }
 
         public DateTime Date { get; set; }
 
         public int Round
         {
             get; set;
-
         }
     }
 }

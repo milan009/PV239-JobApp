@@ -13,9 +13,6 @@ namespace JobApp.Models
 
         public String Position { get; set; }
 
-        //TO DO: mozme proste k interview priradit ID jobOffer
-        public List<Guid> InterviewsIds { get; set; }
-
         public int? OfferedPay { get; set; }
 
         public DateTime? CommencementDate { get; set; }

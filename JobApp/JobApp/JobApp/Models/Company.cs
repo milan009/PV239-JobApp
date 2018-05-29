@@ -8,9 +8,5 @@ namespace JobApp.Models
     {
         //TO DO: Obmedzit dlzku na 100 znakov
         public String Name { get; set; }
-
-        public Guid ContactId { get; set; }
-
-        public Guid AddressId { get; set; }
     }
 }
