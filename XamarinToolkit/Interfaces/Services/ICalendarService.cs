@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using JobApp.Models;
 
-namespace JobApp.Services
+namespace XamarinToolkit.Interfaces.Services
 {
     public interface ICalendarService
     {
@@ -12,3 +10,4 @@ namespace JobApp.Services
         List<IInterview> GetInterviewsById(Guid jobGuid);
     }
 }
+\

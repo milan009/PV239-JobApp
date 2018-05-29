@@ -133,5 +133,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\JobApp\JobApp.projitems" Label="Shared" />
+  <Import Project="..\JobApp.Shared\JobApp.Shared.projitems" Label="Shared" />
 </Project>

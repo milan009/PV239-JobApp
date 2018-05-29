@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobApp.Shared.Views.ContactDetailView"
+             Title="Detail kontaktu">
+
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Text="Save" Icon="save.png" Clicked="Save_Action"/>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Meno" 
+                   Grid.Row="0" 
+                   Grid.Column="0"/>
+            <Entry Text="Meno"
+                   Grid.Row="0" 
+                   Grid.Column="1"/>
+
+            <Label Text="Priezvisko" 
+                   Grid.Row="1" 
+                   Grid.Column="0"/>
+            <Entry Text="Priezvisko"
+                   Grid.Row="1" 
+                   Grid.Column="1"/>
+
+            <Label Text="Mail" 
+                   Grid.Row="2" 
+                   Grid.Column="0"/>
+            <Entry Text="meno.priezvisko@muni.cz"
+                   Keyboard="Email"
+                   Grid.Row="2" 
+                   Grid.Column="1"/>
+
+            <Label Text="Telefón" 
+                   Grid.Row="3" 
+                   Grid.Column="0"/>
+            <Entry Text="+420123456789"
+                   Keyboard="Telephone"
+                   Grid.Row="3" 
+                   Grid.Column="1"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

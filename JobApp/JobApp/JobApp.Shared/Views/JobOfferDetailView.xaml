@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JobApp.Shared.Views.JobOfferDetailView"
+             Title="Detail pracovnej ponuky">
+	
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Order="Primary" Priority="0" Icon="save.png" Text="Save" Clicked="Save_Action"/>
+	</ContentPage.ToolbarItems>
+
+	<ContentPage.Content>
+		<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Pracovná pozícia" 
+                   Grid.Row="0" 
+                   Grid.Column="0"/>
+            <Entry Text="Názov pozície" 
+                   Grid.Row="0" 
+                   Grid.Column="1"/>
+
+            <Label Text="Kontaktná osoba" 
+                   Grid.Row="1" 
+                   Grid.Column="0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Contact_OnPressed"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="Meno osoby" 
+                   Grid.Row="1" 
+                   Grid.Column="1">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Contact_OnPressed"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="Najbližší pohovor" 
+                   Grid.Row="2" 
+                   Grid.Column="0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Interview_OnPressed"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Text="1.1.1970" 
+                   Grid.Row="2" 
+                   Grid.Column="1">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Interview_OnPressed"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="Navrhovaný plat" 
+                   Grid.Row="3" 
+                   Grid.Column="0"/>
+            <Entry Text="1000000 Kč" 
+                   Keyboard="Numeric"
+                   Grid.Row="3" 
+                   Grid.Column="1"/>
+
+            <Label Text="Dátum nástupu" 
+                   Grid.Row="4" 
+                   Grid.Column="0"/>
+            <DatePicker
+                   Grid.Row="4" 
+                   Grid.Column="1"/>
+
+            <Label Text="Typ úväzku" 
+                   Grid.Row="5" 
+                   Grid.Column="0"/>
+            <Label Text="Plný úväzok" 
+                   Grid.Row="5" 
+                   Grid.Column="1"/>
+
+			<Editor Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"/>
+
+		</Grid>
+    </ContentPage.Content>
+</ContentPage>

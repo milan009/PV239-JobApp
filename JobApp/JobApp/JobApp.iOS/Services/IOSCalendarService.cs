@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using EventKit;
 using Foundation;
 using JobApp.iOS.Services;
-using JobApp.Models;
-using JobApp.Services;
 using UIKit;
+using XamarinToolkit.Interfaces.Models;
+using XamarinToolkit.Interfaces.Services;
 
 [assembly: Xamarin.Forms.Dependency(typeof(IOSCalendarService))]
 

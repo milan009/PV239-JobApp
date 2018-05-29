@@ -9,16 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobApp.iOS", "JobApp\JobApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobApp.UWP", "JobApp\JobApp.UWP\JobApp.UWP.csproj", "{F4EDD2AD-97C5-4F05-B9BF-7D14BEF2A37B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JobApp", "JobApp\JobApp\JobApp.shproj", "{E70B2C45-6D30-4B91-B134-69D77A109922}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "JobApp.Shared", "JobApp\JobApp.Shared\JobApp.Shared.shproj", "{E70B2C45-6D30-4B91-B134-69D77A109922}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinToolkit", "..\XamarinToolkit\XamarinToolkit.csproj", "{6E7F5541-90C8-407C-8843-0546CA7D69EB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		JobApp\JobApp\JobApp.projitems*{36c72b8b-b8ee-43de-a68a-61290a4ae2cc}*SharedItemsImports = 4
-		JobApp\JobApp\JobApp.projitems*{4f43d992-4bfb-430c-b8a5-9c01ffae52fa}*SharedItemsImports = 4
-		JobApp\JobApp\JobApp.projitems*{e70b2c45-6d30-4b91-b134-69d77a109922}*SharedItemsImports = 13
-		JobApp\JobApp\JobApp.projitems*{f4edd2ad-97c5-4f05-b9bf-7d14bef2a37b}*SharedItemsImports = 4
+		JobApp\JobApp.Shared\JobApp.Shared.projitems*{36c72b8b-b8ee-43de-a68a-61290a4ae2cc}*SharedItemsImports = 4
+		JobApp\JobApp.Shared\JobApp.Shared.projitems*{4f43d992-4bfb-430c-b8a5-9c01ffae52fa}*SharedItemsImports = 4
+		JobApp\JobApp.Shared\JobApp.Shared.projitems*{e70b2c45-6d30-4b91-b134-69d77a109922}*SharedItemsImports = 13
+		JobApp\JobApp.Shared\JobApp.Shared.projitems*{f4edd2ad-97c5-4f05-b9bf-7d14bef2a37b}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

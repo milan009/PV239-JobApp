@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using JobApp.Interfaces;
 using JobApp.UWP.DatabaseService;
 using Windows.Storage;
+using XamarinToolkit.Interfaces.Storage;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SQLiteConnectionStringFactory))]
 

@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.Database;
-using Android.OS;
 using Android.Provider;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using Java.Util;
 using JobApp.Droid.Services;
-using JobApp.Models;
-using JobApp.Services;
-using Xamarin.Forms;
+using XamarinToolkit.Interfaces.Models;
+using XamarinToolkit.Interfaces.Services;
 
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidCalendarService))]
 
@@ -64,6 +56,7 @@ namespace JobApp.Droid.Services
             DateTime starTime)
         {
             SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
+            JobApp
         }
 
         /*
