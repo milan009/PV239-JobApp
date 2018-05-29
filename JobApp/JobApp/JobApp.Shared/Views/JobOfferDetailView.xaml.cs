@@ -17,7 +17,7 @@ namespace JobApp.Shared.Views
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new ContactDetailView(), true);
+	        Navigation.PushAsync(new ContactDetailView(App.ContactGuids[0]), true);
 	    }
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
