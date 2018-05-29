@@ -27,120 +27,118 @@ namespace JobApp.Droid.Services
         public void StoreCalendarEvent(IInterview interviewToStore)
         {
             var context = MainActivity.Instance;
+        }
 
-          /*  ContentValues eventValues = new ContentValues();
+        /*
+         * This method handles saving to events by using Intents - calendar app is
+         * opened and user has the ability to manually edit the event before saving it.
+         * It is somewhat more flexible and robust, but requires more interaction from the user.
+         */
+        private void SaveEventIntent(
+            MainActivity context,
+            string eventTitle,
+            string eventDescription,
+            DateTime starTime,
+            DateTime endTime)
+        {
+            Intent calIntent = new Intent(Intent.ActionInsert);
+            calIntent.SetData(CalendarContract.Events.ContentUri);
+            calIntent.SetType("vnd.android.cursor.item/event");
 
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId,
-                2);
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,
-                "Another event");
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Description,
-                "This is an event created from Xamarin.Android");
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone,
-                "UTC");
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone,
-                "UTC");
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart,
-                GetDateTimeMS(2018, 05, 29, 3, 45));
-            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend,
-                GetDateTimeMS(2018, 05, 29, 4, 0));
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Title, eventTitle);
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Description, eventDescription);
 
-            var uri = context.ContentResolver.Insert(CalendarContract.Events.ContentUri,
-                eventValues); 
-                */
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtstart, PrepareTime(starTime));
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtend, PrepareTime(endTime));
+
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventTimezone, "UTC");
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
+
+            context.StartActivity(calIntent);
+        }
+
+        private void SaveEventIntent(
+            MainActivity context,
+            string eventTitle,
+            string eventDescription,
+            DateTime starTime)
+        {
+            SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
+        }
+
+        /*
+         * This method saves events just by using ContentResolver API. Is more prone to errors
+         * and for some reasons always makes the event start and end one month after desired date.
+         * On the other hand, it could be easier to automate - currently, only selecting which
+         * calendar to use is nescessary.
+         */
+        private void SaveEventDialog(
+            MainActivity context,
+            string eventTitle,
+            string eventDescription,
+            DateTime starTime,
+            DateTime endTime)
+        {
             try
             {
-
-                // List Calendars
                 var calendarsUri = CalendarContract.Calendars.ContentUri;
 
-                string[] calendarsProjection = {
-                        CalendarContract.Calendars.InterfaceConsts.Id,
-                        CalendarContract.Calendars.InterfaceConsts.CalendarDisplayName,
-                        CalendarContract.Calendars.InterfaceConsts.AccountName
-                    };
+                string[] calendarsProjection =
+                {
+                    CalendarContract.Calendars.InterfaceConsts.Id,
+                    CalendarContract.Calendars.InterfaceConsts.CalendarDisplayName,
+                    CalendarContract.Calendars.InterfaceConsts.AccountName
+                };
 
                 var cursor = context.ContentResolver.Query(calendarsUri, calendarsProjection, null, null, null);
-                if (calendarsProjection.Length > 0)
+                if (cursor.Count > 0)
                 {
-                    for (var j = 0; j < calendarsProjection.Length; j++)
+                    var dbuilder = new AlertDialog.Builder(context);
+                    dbuilder
+                        .SetTitle("Zvolte kalendář");
+
+                    var items = new List<string>();
+
+                    while (cursor.MoveToNext())
                     {
-                        Log.Error("Showcase", calendarsProjection[j]);
+                        var displayName = cursor.GetString(cursor.GetColumnIndex(calendarsProjection[1]));
+                        items.Add(displayName);
                     }
 
-                    cursor.MoveToPosition(1);
-                    int calId = cursor.GetInt(cursor.GetColumnIndex(calendarsProjection[0]));
+                    dbuilder.SetItems(items.ToArray(),
+                        (sender, args) =>
+                        {
+                            var eventValues = new ContentValues();
 
-                    var eventValues = new ContentValues();
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, args.Which + 1);
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,
+                                eventTitle);
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.Description,
+                                eventDescription);
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart,
+                                PrepareTime(starTime));
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend,
+                                PrepareTime(endTime));
 
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, calId);
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,
-                        "Event Title");
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.Description,
-                        "Event Description");
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart,
-                        GetDateTimeMS(2018, 4, 29, 2, 0));
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend,
-                        GetDateTimeMS(2018, 4, 29, 4, 0));
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone,
+                                "UTC");
+                            eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone,
+                                "UTC");
 
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone,
-                        "EST");
-                    eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone,
-                        "EST");
+                            context.ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
+                        });
 
-                    context.ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
+                    dbuilder.Show();
                 }
                 else
                 {
                     Toast.MakeText(context, "No calendar found", ToastLength.Long).Show();
                 }
-
             }
             catch (Exception ex)
             {
                 Log.Error("Showcase", "exception create calendar event");
             }
-
-
-            /*    var intent = new Intent(context, typeof(CalendarService));
-                context.StartActivity(intent);*/
-
-            /*   Intent calIntent = new Intent(Intent.ActionInsert);
-               calIntent.SetData(CalendarContract.Events.ContentUri);
-               calIntent.SetType("vnd.android.cursor.item/event");
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Title, "Test Event from M4A");
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Description, "This is an event created from Xamarin.Android");
-
-               long lDtStart = GetDateTimeMS(2018, 5, 29, 2, 0);
-               long lDtEnd = GetDateTimeMS(2018, 5, 29, 4, 0);
-
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtstart, lDtStart);
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtend, lDtEnd);
-
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventTimezone, "UTC");
-               calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
-
-               context.StartActivity(calIntent);*/
-            /*
-                 ContentValues eventValues = new ContentValues();
-
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId,
-                     2);
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.Title,
-                     "Test Event from M4A");
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.Description,
-                     "This is an event created from Xamarin.Android");
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone,
-                     "UTC");
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone,
-                     "UTC");
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart,
-                     GetDateTimeMS(2018, 05, 28, 18, 45));
-                 eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend,
-                     GetDateTimeMS(2018, 05, 28, 19, 0));
-
-                 var uri = context.ContentResolver.Insert(CalendarContract.Events.ContentUri,
-                     eventValues);*/
         }
 
         List<IInterview> ICalendarService.GetEventsByDay(DateTime day)
@@ -153,15 +151,15 @@ namespace JobApp.Droid.Services
             throw new NotImplementedException();
         }
 
-        long GetDateTimeMS(int yr, int month, int day, int hr, int min)
+        private long PrepareTime(DateTime time)
         {
             Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
 
-            c.Set(Java.Util.CalendarField.DayOfMonth, day);
-            c.Set(Java.Util.CalendarField.HourOfDay, hr);
-            c.Set(Java.Util.CalendarField.Minute, min);
-            c.Set(Java.Util.CalendarField.Month, month);
-            c.Set(Java.Util.CalendarField.Year, yr);
+            c.Set(Java.Util.CalendarField.DayOfMonth, time.Day);
+            c.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
+            c.Set(Java.Util.CalendarField.Minute, time.Minute);
+            c.Set(Java.Util.CalendarField.Month, time.Month);
+            c.Set(Java.Util.CalendarField.Year, time.Year);
 
             return c.TimeInMillis;
         }
