@@ -121,11 +121,11 @@ namespace JobApp
             new JobOffer
             {
                 Id = JobOfferGuids[0],
-                CommencementDate = DateTime.Today + TimeSpan.FromDays(30),
+             //   CommencementDate = DateTime.Today + TimeSpan.FromDays(30),
                 CompanyId = CompanyGuids[0],
                 Note = "Do you like cleaning dishes? In that case, we want YOU in our company!",
                 Position = "Dish washer",
-                OfferedPay = 12000,
+             //   OfferedPay = 12000,
             },
             new JobOffer
             {

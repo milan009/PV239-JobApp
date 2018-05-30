@@ -29,7 +29,7 @@
                    Grid.Row="0" 
                    Grid.Column="0"
                    VerticalOptions="Center"/>
-            <Entry Text="Názov pozície" 
+            <Entry Text="{Binding Path=JobOffer.Position}" 
                    Grid.Row="1" 
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
@@ -73,21 +73,26 @@
             <Label Text="Navrhovaný plat" 
                    Grid.Row="4" 
                    Grid.Column="0"
-                   VerticalOptions="Center"/>
-            <Entry Text="1000000 Kč" 
+                   VerticalOptions="Center"
+                   IsVisible="{Binding Path=SalaryVisible}"/>
+            <Entry Text="{Binding Path=SalaryValue}" 
                    Keyboard="Numeric"
                    Grid.Row="4" 
                    Grid.Column="1"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   IsVisible="{Binding Path=SalaryVisible}"/>
 
             <Label Text="Dátum nástupu" 
                    Grid.Row="5" 
                    Grid.Column="0"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   IsVisible="{Binding Path=DateVisible}"/>
             <DatePicker
+                   Date="{Binding Path=DateValue}"
                    Grid.Row="5" 
                    Grid.Column="1"
-                    VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   IsVisible="{Binding Path=DateVisible}"/>
 
             <Label Text="Typ úväzku" 
                    Grid.Row="6" 

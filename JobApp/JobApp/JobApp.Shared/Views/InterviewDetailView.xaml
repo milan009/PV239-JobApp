@@ -13,6 +13,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -38,7 +39,12 @@
                 Grid.Row="1" 
                 Grid.Column="1"
                 VerticalOptions="Center"/>
-            
+
+            <Button 
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Text="Uložit do kalendáře" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,7 +1,11 @@
 ﻿using System;
+using JobApp.Shared.DatabaseServices;
+using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
+using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinToolkit.Interfaces.Storage;
 
 namespace JobApp.Shared.Views
 {
@@ -10,10 +14,27 @@ namespace JobApp.Shared.Views
 	{
         public JobOfferDetailViewModel ViewModel { get; set; } = new JobOfferDetailViewModel();
 
-		public JobOfferDetailView ()
+        public JobOfferRepository Repository { get; set; } = new JobOfferRepository(
+            new SQLiteAsyncConnection(
+                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
+
+        public JobOfferDetailView (Guid? offerGuid = null)
 		{
-			InitializeComponent ();
-		}
+			InitializeComponent();
+		    BindingContext = ViewModel;
+
+		    if (offerGuid.HasValue)
+		    {
+		        Repository.TryGetJobOfferByIdAsync(offerGuid.Value)
+		            .ContinueWith(task => OnContactLoaded(task.Result));
+		    }
+        }
+
+	    private void OnContactLoaded(JobOffer offer)
+	    {
+	        ViewModel.JobOffer = offer;
+       //     throw new NotImplementedException();
+	    }
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {
