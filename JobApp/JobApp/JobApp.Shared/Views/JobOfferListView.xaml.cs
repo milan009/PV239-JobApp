@@ -24,8 +24,7 @@ namespace JobApp.Shared.Views
 
         private void OnJobOffersLoaded(object sender, EventArgs e)
         {
-            var o = 5;
-            //    throw new NotImplementedException();
+
         }
 
         protected override void OnAppearing()
@@ -34,11 +33,15 @@ namespace JobApp.Shared.Views
             ViewModel.Sycnhronize();
         }
 
-
         //TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom
         private void Button_OnPressed(object sender, EventArgs e)
 	    {
 	        Navigation.PushAsync(new JobOfferDetailView(), true);
+        }
+
+	    private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+	    {
+	        Navigation.PushAsync(new JobOfferDetailView(((JobOffer)e.SelectedItem).Id), true);
         }
 	}
 }

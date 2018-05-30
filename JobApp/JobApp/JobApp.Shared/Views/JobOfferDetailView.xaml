@@ -103,7 +103,8 @@
                    Grid.Column="1"
                    VerticalOptions="Center"/>
 
-			<Editor Grid.Row="7"
+			<Editor Text="{Binding Path=JobOffer.Note}"
+			        Grid.Row="7"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"/>
 

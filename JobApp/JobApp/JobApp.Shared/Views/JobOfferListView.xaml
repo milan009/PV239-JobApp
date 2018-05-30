@@ -17,7 +17,9 @@
 			</Grid.RowDefinitions>
 
             <!-- list of job offers -->
-            <ListView ItemsSource="{Binding JobOffers}">
+            <ListView 
+                ItemsSource="{Binding JobOffers}" 
+                ItemSelected="ListView_OnItemSelected" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -29,9 +31,10 @@
                             </ViewCell.ContextActions>
                             <Grid>
                                 <Label
-                                  Text="{Binding Position, Mode=OneWay}"
-                                  VerticalOptions="Center"
-                                  FontSize="Large" />
+                                    Text="{Binding Position, Mode=OneWay}"
+                                    VerticalOptions="Center"
+                                    FontSize="Large" 
+                                  />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

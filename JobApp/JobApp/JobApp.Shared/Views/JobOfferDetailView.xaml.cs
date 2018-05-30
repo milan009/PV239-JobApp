@@ -12,21 +12,21 @@ namespace JobApp.Shared.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class JobOfferDetailView : ContentPage
 	{
-        public JobOfferDetailViewModel ViewModel { get; set; } = new JobOfferDetailViewModel();
+        public JobOfferDetailViewModel ViewModel { get; set; }
 
         public JobOfferDetailView (Guid? offerGuid = null)
 		{
-		  
+		    ViewModel = new JobOfferDetailViewModel(offerGuid);
+            ViewModel.JobOfferLoaded += OnContactLoaded;
 
 		    InitializeComponent();
 		    BindingContext = ViewModel;
         }
 
-        private void OnContactLoaded(JobOffer offer)
-	    {
-	        ViewModel.JobOffer = offer;
-       //     throw new NotImplementedException();
-	    }
+        private void OnContactLoaded(object sender, EventArgs e)
+        {
+            
+        }
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {

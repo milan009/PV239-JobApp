@@ -62,6 +62,7 @@ namespace JobApp.Shared.ViewModels
             }
         }
 
+        // todo: use command?
         public async Task<bool> Save()
         {
             if (JobOffer.Id == default(Guid))
