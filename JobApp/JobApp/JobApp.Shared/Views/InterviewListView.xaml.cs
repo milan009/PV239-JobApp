@@ -10,14 +10,14 @@ namespace JobApp.Shared.Views
 	{
         public InterviewListViewModel ViewModel { get; set; } = new InterviewListViewModel();
 
-		public InterviewListView ()
+		public InterviewListView(Guid[] interviewGuids = null)
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 
 	    private void Button_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new InterviewDetailView(), true);
+	        Navigation.PushAsync(new InterviewDetailView(MockData.InterviewGuids[0]), true);
         }
 	}
 }

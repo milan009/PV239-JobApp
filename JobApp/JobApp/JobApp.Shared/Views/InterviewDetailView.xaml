@@ -22,7 +22,7 @@
             <Label Text="Kolo" 
                    Grid.Row="0" 
                    Grid.Column="0"/>
-            <Entry Text="1"
+            <Entry Text="{Binding Path=Interview.Round, Mode=TwoWay}"
                    Keyboard="Numeric"
                    Grid.Row="0" 
                    Grid.Column="1"/>
@@ -31,8 +31,10 @@
                    Grid.Row="1" 
                    Grid.Column="0"/>
             <DatePicker 
+                Date="{Binding Path=Interview.Date, Mode=TwoWay}"
                 Grid.Row="1" 
                 Grid.Column="1"/>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

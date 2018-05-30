@@ -16,7 +16,7 @@ namespace JobApp.Shared.Views
 
         public ContactRepository Repository { get; set; } = new ContactRepository(
             new SQLiteAsyncConnection(
-                DependencyService.Get<ISQLiteConnectionStringFactory>().Create("databName")));
+                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName))); 
 
 		public ContactDetailView(Guid? contactGuid = null)
 		{
