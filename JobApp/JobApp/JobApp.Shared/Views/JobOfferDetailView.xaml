@@ -9,8 +9,9 @@
 	</ContentPage.ToolbarItems>
 
 	<ContentPage.Content>
-		<Grid>
+		<Grid Padding="15">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -26,64 +27,78 @@
 
             <Label Text="Pracovná pozícia" 
                    Grid.Row="0" 
-                   Grid.Column="0"/>
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Entry Text="Názov pozície" 
-                   Grid.Row="0" 
-                   Grid.Column="1"/>
+                   Grid.Row="1" 
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   VerticalOptions="Center"
+                   />
 
             <Label Text="Kontaktná osoba" 
-                   Grid.Row="1" 
-                   Grid.Column="0">
+                   Grid.Row="2" 
+                   Grid.Column="0"
+                   VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Contact_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
             <Label Text="Meno osoby" 
-                   Grid.Row="1" 
-                   Grid.Column="1">
+                   Grid.Row="2" 
+                   Grid.Column="1"
+                   VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Contact_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
 
             <Label Text="Najbližší pohovor" 
-                   Grid.Row="2" 
-                   Grid.Column="0">
+                   Grid.Row="3" 
+                   Grid.Column="0"
+                   VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Interview_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
             <Label Text="1.1.1970" 
-                   Grid.Row="2" 
-                   Grid.Column="1">
+                   Grid.Row="3" 
+                   Grid.Column="1"
+                   VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Interview_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
 
             <Label Text="Navrhovaný plat" 
-                   Grid.Row="3" 
-                   Grid.Column="0"/>
+                   Grid.Row="4" 
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Entry Text="1000000 Kč" 
                    Keyboard="Numeric"
-                   Grid.Row="3" 
-                   Grid.Column="1"/>
+                   Grid.Row="4" 
+                   Grid.Column="1"
+                   VerticalOptions="Center"/>
 
             <Label Text="Dátum nástupu" 
-                   Grid.Row="4" 
-                   Grid.Column="0"/>
+                   Grid.Row="5" 
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <DatePicker
-                   Grid.Row="4" 
-                   Grid.Column="1"/>
+                   Grid.Row="5" 
+                   Grid.Column="1"
+                    VerticalOptions="Center"/>
 
             <Label Text="Typ úväzku" 
-                   Grid.Row="5" 
-                   Grid.Column="0"/>
+                   Grid.Row="6" 
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Label Text="Plný úväzok" 
-                   Grid.Row="5" 
-                   Grid.Column="1"/>
+                   Grid.Row="6" 
+                   Grid.Column="1"
+                   VerticalOptions="Center"/>
 
-			<Editor Grid.Row="6"
+			<Editor Grid.Row="7"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"/>
 

@@ -10,7 +10,7 @@
 	</ContentPage.ToolbarItems>
 
 	<ContentPage.Content >
-        <Grid>
+        <Grid Padding="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -24,36 +24,45 @@
 
             <Label Text="Meno" 
                    Grid.Row="0" 
-                   Grid.Column="0"/>
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Entry 
                    Text="{Binding FirstName, Mode=TwoWay}"
                    Grid.Row="0" 
                    Grid.Column="1"
-                   />
+                   VerticalOptions="Center"/>
 
             <Label Text="Priezvisko" 
                    Grid.Row="1" 
-                   Grid.Column="0"/>
+                   Grid.Column="0"
+                   VerticalOptions="Center"
+                   />
             <Entry 
                    Text="{Binding LastName}"
                    Grid.Row="1" 
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   VerticalOptions="Center"
+                />
 
             <Label Text="Mail" 
                    Grid.Row="2" 
-                   Grid.Column="0"/>
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Entry Text="{Binding Path=Contact.Email, Mode=TwoWay}"
                    Keyboard="Email"
                    Grid.Row="2" 
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   VerticalOptions="Center"/>
 
             <Label Text="Telefón" 
                    Grid.Row="3" 
-                   Grid.Column="0"/>
+                   Grid.Column="0"
+                   VerticalOptions="Center"/>
             <Entry Text="{Binding Path=Contact.Phone, Mode=TwoWay}"
                    Keyboard="Telephone"
                    Grid.Row="3" 
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

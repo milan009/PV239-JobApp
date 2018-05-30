@@ -10,7 +10,7 @@
 	</ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <Grid>
+        <Grid Padding="15">
             <Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
