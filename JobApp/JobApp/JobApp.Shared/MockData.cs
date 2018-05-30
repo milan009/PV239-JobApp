@@ -15,7 +15,6 @@ namespace JobApp
         {
             Guid.Parse("CDADA936-9C83-4067-9A59-772EC83E1DBB"),
             Guid.Parse("1E521CE5-2687-41FF-8D47-45DE29A94D46"),
-            Guid.Parse("E169494E-1B91-4E53-AEA2-B4E1555B5B9C"),
         };
 
         public static Guid[] InterviewGuids =
@@ -42,7 +41,6 @@ namespace JobApp
             new Contact
             {
                 Id = ContactGuids[0],
-                CompanyId = CompanyGuids[0],
                 Email = "SamMolek@Bloh.Glog",
                 Name = "Sam Molek",
                 Phone = "157201652"
@@ -50,18 +48,9 @@ namespace JobApp
             new Contact
             {
                 Id = ContactGuids[1],
-                CompanyId = CompanyGuids[0],
                 Email = "WendyWolowitz@Wloh.Wlah",
                 Name = "Wendy Wolowitz",
                 Phone = "778778822"
-            },
-            new Contact
-            {
-                Id = ContactGuids[2],
-                CompanyId = CompanyGuids[1],
-                Email = "Johnny@JohnnySolver.com",
-                Name = "JohnnySolever",
-                Phone = "000000000"
             },
         };
 
@@ -85,7 +74,7 @@ namespace JobApp
 
             new Interview
             {
-                Date = DateTime.Now + TimeSpan.FromDays(3),
+                Date = DateTime.Now - TimeSpan.FromDays(3),
                 Id = InterviewGuids[2],
                 Round = 1,
                 JobOfferId = JobOfferGuids[1]
@@ -126,6 +115,7 @@ namespace JobApp
                 Note = "Do you like cleaning dishes? In that case, we want YOU in our company!",
                 Position = "Dish washer",
              //   OfferedPay = 12000,
+                ContactId = ContactGuids[0],
             },
             new JobOffer
             {
@@ -135,6 +125,7 @@ namespace JobApp
                 Note = "Youe task will be mostly focused on taking care of our cars",
                 Position = "Car cleaner",
                 OfferedPay = 22000,
+                ContactId = ContactGuids[1],
             },
         };
 

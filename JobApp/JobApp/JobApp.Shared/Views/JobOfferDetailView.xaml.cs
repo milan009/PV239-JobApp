@@ -17,13 +17,13 @@ namespace JobApp.Shared.Views
         public JobOfferDetailView (Guid? offerGuid = null)
 		{
 		    ViewModel = new JobOfferDetailViewModel(offerGuid);
-            ViewModel.JobOfferLoaded += OnContactLoaded;
+            ViewModel.JobOfferLoaded += OnOfferLoaded;
 
 		    InitializeComponent();
 		    BindingContext = ViewModel;
         }
 
-        private void OnContactLoaded(object sender, EventArgs e)
+        private void OnOfferLoaded(object sender, EventArgs e)
         {
             
         }

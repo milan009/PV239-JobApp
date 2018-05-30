@@ -1,5 +1,6 @@
 ﻿using System;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 using XamarinToolkit.Interfaces.Models;
 
 namespace JobApp.Shared.Models
@@ -8,7 +9,7 @@ namespace JobApp.Shared.Models
     public class Address : BasicObject, IAddress
     {
         // parameters
-
+        [ForeignKey(typeof(Company))]
         public Guid CompanyId { get; set; }
 
         //TO DO: Obmedzit dlzku na 50 znakov
@@ -26,6 +27,10 @@ namespace JobApp.Shared.Models
         //TO DO: Obmedzit dlzku na 50 znakov
         public String Country { get; set; }
 
+        [OneToOne(ReadOnly = true)]
+        public Company Company {get; set; }
+
+        [Ignore]
         public String AddressInfoCalculated =>
             $"{this.Street} {this.Number}, {this.PostCode} {this.City}, {this.Country}";
     }

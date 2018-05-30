@@ -31,6 +31,8 @@ namespace JobApp.Shared.ViewModels
                 OnPropertyChanged(nameof(SalaryValue));
                 OnPropertyChanged(nameof(SalaryVisible));
                 OnPropertyChanged(nameof(DateValue));
+                OnPropertyChanged(nameof(ContactName));
+                OnPropertyChanged(nameof(NearestInterviewDate));
             }
         }
         public string SalaryValue
@@ -43,6 +45,13 @@ namespace JobApp.Shared.ViewModels
             get => JobOffer.CommencementDate.GetValueOrDefault();
             set => _jobOffer.CommencementDate = value;
         }
+
+        public string ContactName => JobOffer.Contact?.Name ?? "<Žádný kontakt>";
+
+        public string NearestInterviewDate => JobOffer
+            .Interviews?
+            .Where(interview => interview.Date > DateTime.Now)
+            .Min(interview => interview.Date).ToString("dd. MM. yyyy") ?? "<Žádné interview>";
 
         public bool SalaryVisible => JobOffer.OfferedPay.HasValue;
         public bool DateVisible => JobOffer.CommencementDate.HasValue;

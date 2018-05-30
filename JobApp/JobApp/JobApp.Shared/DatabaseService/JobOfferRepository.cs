@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using SQLite;
+using SQLiteNetExtensionsAsync.Extensions;
 using System.Threading.Tasks;
 using JobApp.Shared.Models;
 
@@ -20,10 +21,9 @@ namespace JobApp.Shared.DatabaseServices
         {
             try
             {
-                return await _database
-                    .Table<JobOffer>()
-                    .Where(jobOffer => jobOffer.Id == id)
-                    .FirstAsync();
+                var r = await _database.GetWithChildrenAsync<JobOffer>(id);
+                r.Company = null;
+                return r;
             }
             catch
             {

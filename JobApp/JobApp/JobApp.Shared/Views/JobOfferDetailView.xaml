@@ -44,7 +44,7 @@
                     <TapGestureRecognizer Tapped="Contact_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
-            <Label Text="Meno osoby" 
+            <Label Text="{Binding Path=ContactName}" 
                    Grid.Row="2" 
                    Grid.Column="1"
                    VerticalOptions="Center">
@@ -61,7 +61,7 @@
                     <TapGestureRecognizer Tapped="Interview_OnPressed"/>
                 </Label.GestureRecognizers>
             </Label>
-            <Label Text="1.1.1970" 
+            <Label Text="{Binding Path=NearestInterviewDate}" 
                    Grid.Row="3" 
                    Grid.Column="1"
                    VerticalOptions="Center">
