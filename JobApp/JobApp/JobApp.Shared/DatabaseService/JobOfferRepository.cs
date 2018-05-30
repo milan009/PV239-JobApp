@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using SQLite;
 using System.Threading.Tasks;
 using JobApp.Shared.Models;
@@ -22,6 +24,20 @@ namespace JobApp.Shared.DatabaseServices
                     .Table<JobOffer>()
                     .Where(jobOffer => jobOffer.Id == id)
                     .FirstAsync();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<JobOffer>> TryGetAllJobOffers()
+        {
+            try
+            {
+                return await _database
+                    .Table<JobOffer>()
+                    .ToListAsync();
             }
             catch
             {

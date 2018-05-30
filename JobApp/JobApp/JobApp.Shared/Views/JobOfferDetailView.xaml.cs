@@ -14,23 +14,15 @@ namespace JobApp.Shared.Views
 	{
         public JobOfferDetailViewModel ViewModel { get; set; } = new JobOfferDetailViewModel();
 
-        public JobOfferRepository Repository { get; set; } = new JobOfferRepository(
-            new SQLiteAsyncConnection(
-                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
-
         public JobOfferDetailView (Guid? offerGuid = null)
 		{
-			InitializeComponent();
-		    BindingContext = ViewModel;
+		  
 
-		    if (offerGuid.HasValue)
-		    {
-		        Repository.TryGetJobOfferByIdAsync(offerGuid.Value)
-		            .ContinueWith(task => OnContactLoaded(task.Result));
-		    }
+		    InitializeComponent();
+		    BindingContext = ViewModel;
         }
 
-	    private void OnContactLoaded(JobOffer offer)
+        private void OnContactLoaded(JobOffer offer)
 	    {
 	        ViewModel.JobOffer = offer;
        //     throw new NotImplementedException();
@@ -50,7 +42,7 @@ namespace JobApp.Shared.Views
 
 	    private void Save_Action(object sender, EventArgs e)
 	    {
-	        throw new NotImplementedException();
+	        ViewModel.Save();
 	    }
 	}
 }

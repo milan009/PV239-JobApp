@@ -1,15 +1,26 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using JobApp.Shared.DatabaseServices;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;
+using SQLite;
 using Xamarin.Forms;
+using XamarinToolkit.Interfaces.Storage;
 using XamarinToolkit.Mvvm;
 
 namespace JobApp.Shared.ViewModels
 {
     public class JobOfferListViewModel : ViewModelBase
     {
-        private GuidService _guidService = new GuidService();
-        private ObservableCollection<JobOffer> _jobOffers = new ObservableCollection<JobOffer>();
+        private readonly JobOfferRepository _repository = new JobOfferRepository(
+            new SQLiteAsyncConnection(
+                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
+
+        private ObservableCollection<JobOffer> _jobOffers;
+        private JobOffer _selectedJobOffer;
+
+        private Command<JobOffer> _deleteJobOfferCommand;
 
         public ObservableCollection<JobOffer> JobOffers
         {
@@ -17,50 +28,44 @@ namespace JobApp.Shared.ViewModels
             set
             {
                 _jobOffers = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(JobOffers));
             }
         }
-
-        private JobOffer _selectedJobOffer;
-
         public JobOffer SelectedJobOffer
         {
             get => _selectedJobOffer;
             set
             {
                 _selectedJobOffer = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedJobOffer));
             }
         }
 
-        private Command<string> _addJobOfferCommand;
-
-        public Command<string> AddJobOfferCommand =>
-            _addJobOfferCommand ?? (_addJobOfferCommand = new Command<string>(AddJobOffer));
-
-        private Command<JobOffer> _deleteJobOfferCommand;
-
         public Command<JobOffer> DeleteJobOfferCommand =>
-            _deleteJobOfferCommand ?? (_deleteJobOfferCommand = new Command<JobOffer>(DeleteJobOffer));
+            _deleteJobOfferCommand ?? (_deleteJobOfferCommand = 
+                new Command<JobOffer>(async jobOffer => await DeleteJobOffer(jobOffer)));
 
-        private void AddJobOffer(string companyName)
+        public event EventHandler JobOffersLoaded;
+
+        public JobOfferListViewModel()
         {
-            if (string.IsNullOrEmpty(companyName)) return;
-
-            //TO DO: vytvorit novu ponuku
-            var newJobOffer = new JobOffer()
+            _repository.TryGetAllJobOffers().ContinueWith(task =>
             {
-                Id = _guidService.GenerateNewGuid(),
-                Position = companyName 
-            };
-
-            JobOffers.Add(newJobOffer);
+                JobOffers = new ObservableCollection<JobOffer>(task.Result);
+                JobOffersLoaded?.Invoke(this, null);
+            });
         }
 
-        private void DeleteJobOffer(JobOffer jobOffer)
+        public async Task Sycnhronize()
+        {
+            JobOffers = new ObservableCollection<JobOffer>(await _repository.TryGetAllJobOffers());
+            JobOffersLoaded?.Invoke(this, null);
+        }
+
+        private async Task<bool> DeleteJobOffer(JobOffer jobOffer)
         {
             JobOffers.Remove(jobOffer);
+            return await _repository.TryDeleteJobOfferAsync(jobOffer);
         }
-
     }
 }
