@@ -21,32 +21,42 @@ namespace JobApp
 			base.MainPage = new NavigationPage(new JobOfferListView());
 		}
 
-		protected override async void OnStart ()
+		protected override void OnStart ()
 		{
-		    await PopulateDb();
+            PopulateDb();
 		}
 
-	    private static async Task PopulateDb()
+	    private static void PopulateDb()
 	    {
 	        var db = new SQLiteAsyncConnection(
 	            DependencyService.Get<ISQLiteConnectionStringFactory>().Create(DatabaseName));
 
-	        await db.DropTableAsync<Company>();
-	        await db.DropTableAsync<Contact>();
-	        await db.DropTableAsync<Address>();
-	        await db.DropTableAsync<JobOffer>();
-	        await db.DropTableAsync<Interview>();
+	        Task<int>[] dropTasks =
+	        {
+	            db.DropTableAsync<Company>(),
+	            db.DropTableAsync<Contact>(),
+	            db.DropTableAsync<Address>(),
+	            db.DropTableAsync<JobOffer>(),
+	            db.DropTableAsync<Interview>()
+	        };
 
-	        await db.CreateTablesAsync<Contact, JobOffer, Address, Company, Interview>();
+	        Task.WaitAll(dropTasks);
 
-	        await db.InsertAllAsync(MockData.Companies);
-	        await db.InsertAllAsync(MockData.Addresses);
-	        await db.InsertAllAsync(MockData.Contacts);
-	        await db.InsertAllAsync(MockData.JobOffers);
-	        await db.InsertAllAsync(MockData.Interviews);
+	        db.CreateTablesAsync<Contact, JobOffer, Address, Company, Interview>().Wait();
+
+	        Task<int>[] createTasks =
+	        {
+	            db.InsertAllAsync(MockData.Companies),
+	            db.InsertAllAsync(MockData.Addresses),
+	            db.InsertAllAsync(MockData.Contacts),
+	            db.InsertAllAsync(MockData.JobOffers),
+	            db.InsertAllAsync(MockData.Interviews)
+	        };
+
+	        Task.WaitAll(createTasks);
 	    }
 
-	    protected override void OnSleep ()
+        protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
 		}
