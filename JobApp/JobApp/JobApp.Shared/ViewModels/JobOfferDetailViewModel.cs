@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.Text;
@@ -48,10 +49,18 @@ namespace JobApp.Shared.ViewModels
 
         public string ContactName => JobOffer.Contact?.Name ?? "<Žádný kontakt>";
 
-        public string NearestInterviewDate => JobOffer
-            .Interviews?
-            .Where(interview => interview.Date > DateTime.Now)
-            .Min(interview => interview.Date).ToString("dd. MM. yyyy") ?? "<Žádné interview>";
+        public string NearestInterviewDate
+        {
+            get
+            {
+                var upcomingInterviews = JobOffer
+                        .Interviews?
+                        .Where(interview => interview.Date > DateTime.Now);
+
+                return (upcomingInterviews == null || !upcomingInterviews.Any()) ? 
+                    "<Žádný pohovor>" : upcomingInterviews.Min(interview => interview.Date).ToString("dd. MM. yyyy");
+            }
+        }
 
         public bool SalaryVisible => JobOffer.OfferedPay.HasValue;
         public bool DateVisible => JobOffer.CommencementDate.HasValue;

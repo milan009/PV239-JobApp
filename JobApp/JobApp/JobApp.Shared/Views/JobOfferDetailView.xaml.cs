@@ -31,13 +31,13 @@ namespace JobApp.Shared.Views
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new ContactDetailView(MockData.ContactGuids[0]), true);
+	        Navigation.PushAsync(new ContactDetailView(ViewModel.JobOffer.ContactId), true);
 	    }
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
 	    {
-	        var r = ViewModel.JobOffer.Interviews.Select(interview => interview.Id).ToArray();
-            Navigation.PushAsync(new InterviewListView(r), true);
+	        var upcomingInterviews = ViewModel.JobOffer.Interviews.Select(interview => interview.Id).ToArray();
+            Navigation.PushAsync(new InterviewListView(upcomingInterviews), true);
 	    }
 
 	    private void Save_Action(object sender, EventArgs e)

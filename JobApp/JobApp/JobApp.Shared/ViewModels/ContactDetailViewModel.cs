@@ -1,18 +1,18 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using JobApp.Shared.Models;
 using XamarinToolkit.Mvvm;
 
 namespace JobApp.Shared.ViewModels
 {
-    public class ContactDetailViewModel : ViewModelBase
+    public class ContactDetailViewModel : ViewModelBaseGeneric<Contact>
     {
-        private Contact _contact = new Contact();
-        public Contact Contact {
-            get => _contact;
+        public override Contact DataModel { 
+        get => _dataModel;
             set
             {
-                _contact = value;
-                OnPropertyChanged(nameof(Contact));
+                _dataModel = value;
+                OnPropertyChanged(nameof(DataModel));
                 OnPropertyChanged(nameof(FirstName));
                 OnPropertyChanged(nameof(LastName));
             }
@@ -20,14 +20,16 @@ namespace JobApp.Shared.ViewModels
 
         public string FirstName
         {
-            get => Contact?.Name?.Split(' ').First() ?? "";
-            set => Contact.Name = $"{value} {LastName}";
+            get => DataModel?.Name?.Split(' ').First() ?? "";
+            set => DataModel.Name = $"{value} {LastName}";
         }
 
         public string LastName
         {
-            get => Contact?.Name?.Split(' ').Last() ?? "";
-            set => Contact.Name = $"{FirstName} {value}";
+            get => DataModel?.Name?.Split(' ').Last() ?? "";
+            set => DataModel.Name = $"{FirstName} {value}";
         }
+
+        public ContactDetailViewModel(Guid? id) : base(id) { }
     } 
 }

@@ -12,32 +12,25 @@ namespace JobApp.Shared.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ContactDetailView : ContentPage
 	{
-	    public ContactDetailViewModel ViewModel { get; set; } = new ContactDetailViewModel();
-
-        public ContactRepository Repository { get; set; } = new ContactRepository(
-            new SQLiteAsyncConnection(
-                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName))); 
+	    public ContactDetailViewModel ViewModel { get; set; }
 
 		public ContactDetailView(Guid? contactGuid = null)
 		{
-		    InitializeComponent();
-		    BindingContext = ViewModel;
+		    ViewModel = new ContactDetailViewModel(contactGuid);
+		    ViewModel.Loaded += OnContactLoaded;
 
-            if (contactGuid.HasValue)
-		    {
-		        Repository.TryGetContactByIdAsync(contactGuid.Value)
-		            .ContinueWith(task => OnContactLoaded(task.Result));
-		    }
+            InitializeComponent();
+		    BindingContext = ViewModel;
         }
 
-	    protected void OnContactLoaded(Contact contact)
+	    private void OnContactLoaded(object sender, EventArgs e)
 	    {
-            ViewModel.Contact = contact;
+	        //throw new NotImplementedException();
 	    }
 
 	    private void Save_Action(object sender, EventArgs e)
 	    {
-	        Repository.TryUpdateContactAsync(ViewModel.Contact);
+	       // Repository.TryUpdateContactAsync(ViewModel.DataModel);
 	        //throw new NotImplementedException();
 		}
 	}

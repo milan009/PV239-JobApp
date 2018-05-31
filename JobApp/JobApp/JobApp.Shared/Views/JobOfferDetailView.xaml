@@ -47,7 +47,8 @@
             <Label Text="{Binding Path=ContactName}" 
                    Grid.Row="2" 
                    Grid.Column="1"
-                   VerticalOptions="Center">
+                   VerticalOptions="Center"
+                   FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Contact_OnPressed"/>
                 </Label.GestureRecognizers>
@@ -56,7 +57,8 @@
             <Label Text="Najbližší pohovor" 
                    Grid.Row="3" 
                    Grid.Column="0"
-                   VerticalOptions="Center">
+                   VerticalOptions="Center"
+                   >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Interview_OnPressed"/>
                 </Label.GestureRecognizers>
@@ -64,7 +66,8 @@
             <Label Text="{Binding Path=NearestInterviewDate}" 
                    Grid.Row="3" 
                    Grid.Column="1"
-                   VerticalOptions="Center">
+                   VerticalOptions="Center"
+                   FontAttributes="Bold">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Interview_OnPressed"/>
                 </Label.GestureRecognizers>
