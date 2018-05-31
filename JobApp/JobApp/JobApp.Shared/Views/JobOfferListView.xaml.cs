@@ -27,10 +27,10 @@ namespace JobApp.Shared.Views
 
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel.Sycnhronize();
+            await ViewModel.Sycnhronize();
         }
 
         //TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom

@@ -28,5 +28,11 @@ namespace JobApp.Shared.Views
 	    {
 	        Navigation.PushAsync(new InterviewDetailView(((Interview)e.SelectedItem).Id), true);
         }
+
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			await ViewModel.Sycnhronize();
+		}
 	}
 }
