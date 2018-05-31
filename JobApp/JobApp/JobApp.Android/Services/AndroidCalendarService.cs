@@ -54,10 +54,8 @@ namespace JobApp.Droid.Services
             string eventTitle,
             string eventDescription,
             DateTime starTime)
-        {
-            SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
-        }
-
+                => SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
+        
         /*
          * This method saves events just by using ContentResolver API. Is more prone to errors
          * and for some reasons always makes the event start and end one month after desired date.
@@ -127,7 +125,7 @@ namespace JobApp.Droid.Services
                     Toast.MakeText(context, "No calendar found", ToastLength.Long).Show();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 Log.Error("Showcase", "exception create calendar event");
             }
@@ -137,11 +135,11 @@ namespace JobApp.Droid.Services
         {
             Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
 
-            c.Set(Java.Util.CalendarField.DayOfMonth, time.Day);
-            c.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
-            c.Set(Java.Util.CalendarField.Minute, time.Minute);
-            c.Set(Java.Util.CalendarField.Month, time.Month);
-            c.Set(Java.Util.CalendarField.Year, time.Year);
+            c.Set(CalendarField.DayOfMonth, time.Day);
+            c.Set(CalendarField.HourOfDay, time.Hour);
+            c.Set(CalendarField.Minute, time.Minute);
+            c.Set(CalendarField.Month, time.Month);
+            c.Set(CalendarField.Year, time.Year);
 
             return c.TimeInMillis;
         }
