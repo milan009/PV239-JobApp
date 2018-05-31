@@ -13,7 +13,7 @@ namespace JobApp.Shared.ViewModels
 {
     public class JobOfferListViewModel : ViewModelBase
     {
-        private readonly JobOfferRepository _repository = new JobOfferRepository(
+        private readonly Repository<JobOffer> _repository = new Repository<JobOffer>(
             new SQLiteAsyncConnection(
                 DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
 
@@ -49,7 +49,7 @@ namespace JobApp.Shared.ViewModels
 
         public JobOfferListViewModel()
         {
-            _repository.TryGetAllJobOffers().ContinueWith(task =>
+            _repository.TryGetAllAsync().ContinueWith(task =>
             {
                 JobOffers = new ObservableCollection<JobOffer>(task.Result);
                 JobOffersLoaded?.Invoke(this, null);
@@ -58,14 +58,14 @@ namespace JobApp.Shared.ViewModels
 
         public async Task Sycnhronize()
         {
-            JobOffers = new ObservableCollection<JobOffer>(await _repository.TryGetAllJobOffers());
+            JobOffers = new ObservableCollection<JobOffer>(await _repository.TryGetAllAsync());
             JobOffersLoaded?.Invoke(this, null);
         }
 
         private async Task<bool> DeleteJobOffer(JobOffer jobOffer)
         {
             JobOffers.Remove(jobOffer);
-            return await _repository.TryDeleteJobOfferAsync(jobOffer);
+            return await _repository.TryDeleteEntityAsync(jobOffer);
         }
     }
 }

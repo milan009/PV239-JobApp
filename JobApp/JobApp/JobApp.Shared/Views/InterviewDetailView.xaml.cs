@@ -13,33 +13,23 @@ namespace JobApp.Shared.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class InterviewDetailView : ContentPage
 	{
-        public InterviewDetailViewModel ViewModel { get; set; } = new InterviewDetailViewModel();
+        public InterviewDetailViewModel ViewModel { get; set; }
 	  //  public ICalendarService CalendarService { get; set; }
-
-        public InterviewRepository Repository = new InterviewRepository(
-            new SQLiteAsyncConnection(
-                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
-
 
 		public InterviewDetailView(Guid? interviewGuid = null)
 		{
+		    ViewModel = new InterviewDetailViewModel(interviewGuid);
+		    ViewModel.Loaded += OnInterviewLoaded;
 			InitializeComponent();
             BindingContext = ViewModel;
-
-		    if (interviewGuid.HasValue)
-		    {
-		        Repository.TryGetInterviewByIdAsync(interviewGuid.Value)
-		            .ContinueWith(task => OnInterviewLoaded(task.Result));
-		    }
 
             /*	    CalendarService = DependencyService.Get<ICalendarService>();
                     CalendarService.StoreCalendarEvent(new Interview{Date = DateTime.Now, Id = Guid.NewGuid(), Round = 1});*/
         }
 
-	    private void OnInterviewLoaded(Interview result)
+	    private void OnInterviewLoaded(object sender, EventArgs e)
 	    {
-	        ViewModel.Interview = result;
-	   //     throw new NotImplementedException();
+	        //throw new NotImplementedException();
 	    }
 
 	    private void Save_Action(object sender, EventArgs e)

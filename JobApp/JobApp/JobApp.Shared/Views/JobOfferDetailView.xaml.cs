@@ -6,6 +6,7 @@ using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinToolkit.Interfaces.Storage;
+using System.Linq;
 
 namespace JobApp.Shared.Views
 {
@@ -35,9 +36,8 @@ namespace JobApp.Shared.Views
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
 	    {
-	        Guid[] g = {MockData.InterviewGuids[0], MockData.InterviewGuids[1]};
-
-            Navigation.PushAsync(new InterviewListView(g), true);
+	        var r = ViewModel.JobOffer.Interviews.Select(interview => interview.Id).ToArray();
+            Navigation.PushAsync(new InterviewListView(r), true);
 	    }
 
 	    private void Save_Action(object sender, EventArgs e)

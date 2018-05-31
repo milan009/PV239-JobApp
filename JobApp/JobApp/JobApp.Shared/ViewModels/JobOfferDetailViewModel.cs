@@ -15,7 +15,7 @@ namespace JobApp.Shared.ViewModels
     public class JobOfferDetailViewModel : ViewModelBase
     {
         private readonly GuidService _guidService = new GuidService();
-        private readonly JobOfferRepository _repository = new JobOfferRepository(
+        private readonly Repository<JobOffer> _repository = new Repository<JobOffer>(
             new SQLiteAsyncConnection(
                 DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
 
@@ -62,7 +62,8 @@ namespace JobApp.Shared.ViewModels
         {
             if (offerGuid.HasValue)
             {
-                _repository.TryGetJobOfferByIdAsync(offerGuid.Value)
+                _repository
+                    .TryGetByIdWithChildrenAsync(offerGuid.Value)
                     .ContinueWith(task =>
                     {
                         JobOffer = task.Result;
@@ -77,10 +78,10 @@ namespace JobApp.Shared.ViewModels
             if (JobOffer.Id == default(Guid))
             {
                 JobOffer.Id = _guidService.GenerateNewGuid();
-                return await _repository.TryAddJobOfferAsync(JobOffer);
+                return await _repository.TryAddEntityAsync(JobOffer);
             }
 
-            return await _repository.TryUpdateJobOfferAsync(JobOffer);
+            return await _repository.TryUpdateEntityAsync(JobOffer);
         }
     }
 }

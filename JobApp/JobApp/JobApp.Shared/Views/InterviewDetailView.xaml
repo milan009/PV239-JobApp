@@ -24,7 +24,7 @@
                    Grid.Row="0" 
                    Grid.Column="0"
                    VerticalOptions="Center"/>
-            <Entry Text="{Binding Path=Interview.Round, Mode=TwoWay}"
+            <Entry Text="{Binding Path=DataModel.Round, Mode=TwoWay}"
                    Keyboard="Numeric"
                    Grid.Row="0" 
                    Grid.Column="1"
@@ -35,7 +35,7 @@
                    Grid.Column="0"
                    VerticalOptions="Center"/>
             <DatePicker 
-                Date="{Binding Path=Interview.Date, Mode=TwoWay}"
+                Date="{Binding Path=DataModel.Date, Mode=TwoWay}"
                 Grid.Row="1" 
                 Grid.Column="1"
                 VerticalOptions="Center"/>

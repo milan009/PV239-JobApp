@@ -17,6 +17,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\DatabaseSetUp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\Repository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Address.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BasicObject.cs" />
@@ -38,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\InterviewListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\JobOfferListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModelBaseGeneric.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ContactDetailView.xaml.cs">
       <DependentUpon>ContactDetailView.xaml</DependentUpon>
       <SubType>Code</SubType>

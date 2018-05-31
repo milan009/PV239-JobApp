@@ -1,20 +1,22 @@
-﻿using JobApp.Shared.Models;
-using XamarinToolkit.Mvvm;
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using JobApp.Shared.Models;
 
 namespace JobApp.Shared.ViewModels
 {
-    public class InterviewDetailViewModel : ViewModelBase
+    public class InterviewDetailViewModel : ViewModelBaseGeneric<Interview>
     {
-        private Interview _interview = new Interview();
-
-        public Interview Interview
+        public override Interview DataModel
         {
-            get => _interview;
+            get => _dataModel;
             set
             {
-                _interview = value;
-                OnPropertyChanged(nameof(Interview));
+                _dataModel = value;
+                OnPropertyChanged(nameof(DataModel));
             }
         }
+
+        public InterviewDetailViewModel(Guid? id) : base(id) {}
     }
 }
