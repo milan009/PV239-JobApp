@@ -1,12 +1,9 @@
 ﻿using System;
-using JobApp.Shared.DatabaseServices;
-using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
-using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinToolkit.Interfaces.Storage;
 using System.Linq;
+using JobApp.Shared.Events;
 
 namespace JobApp.Shared.Views
 {
@@ -26,12 +23,18 @@ namespace JobApp.Shared.Views
 
         private void OnOfferLoaded(object sender, EventArgs e)
         {
-            
+        
         }
+
+        public void OnContactAdded(object source, AddContactEventArgs e)
+            => ViewModel.SetContact(e.Contact);
+        
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new ContactDetailView(ViewModel.JobOffer.ContactId), true);
+            var contactPage = new ContactDetailView(ViewModel.JobOffer.ContactId);
+            contactPage.AddContactToJobOffer += OnContactAdded;
+            Navigation.PushAsync(contactPage, true);
 	    }
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
@@ -43,6 +46,7 @@ namespace JobApp.Shared.Views
 	    private async void Save_Action(object sender, EventArgs e)
 	    {
 	        await ViewModel.Save();
+            await Navigation.PopAsync();
 	    }
 	}
 }

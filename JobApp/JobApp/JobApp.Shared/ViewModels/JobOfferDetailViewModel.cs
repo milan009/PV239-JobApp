@@ -61,6 +61,13 @@ namespace JobApp.Shared.ViewModels
 
         public string ContactName => JobOffer.Contact?.Name ?? "<Žádný kontakt>";
 
+        public void SetContact(Contact contact)
+        {
+            _jobOffer.Contact = contact;
+            _jobOffer.ContactId = contact.Id;
+            OnPropertyChanged(nameof(ContactName));
+        }
+
         public string NearestInterviewDate
         {
             get
@@ -93,7 +100,6 @@ namespace JobApp.Shared.ViewModels
             }
         }
 
-        // todo: use command?
         public async Task<bool> Save()
         {
             if (JobOffer.Id == default(Guid))
