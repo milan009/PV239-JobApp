@@ -6,7 +6,7 @@
              x:Name="root">
 
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Order="Primary" Priority="0" Icon="add.jpg" Text="+" Clicked="Button_OnPressed"/>
+		<ToolbarItem Order="Primary" Priority="0" Icon="add.png" Text="+" Clicked="Button_OnPressed"/>
 	</ContentPage.ToolbarItems>
 
     <ContentPage.Content>
