@@ -17,6 +17,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -35,16 +36,22 @@
                    Grid.Column="0"
                    VerticalOptions="Center"/>
             <DatePicker 
-                Date="{Binding Path=DataModel.Date, Mode=TwoWay}"
+                Date="{Binding Path=Date, Mode=TwoWay}"
                 Grid.Row="1" 
                 Grid.Column="1"
                 VerticalOptions="Center"/>
-
+            <TimePicker    
+                Time="{Binding Path=Time, Mode=TwoWay}"
+                Grid.Row="1"       
+                Grid.Column="2" 
+                VerticalOptions="Center"/>
             <Button 
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Text="Uložit do kalendáře" />
+                Text="Uložit do kalendáře"
+                Clicked="Button_Clicked"
+                />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

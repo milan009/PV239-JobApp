@@ -65,5 +65,7 @@ namespace JobApp
 		{
 			// Handle when your app resumes
 		}
+
+
 	}
 }

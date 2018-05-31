@@ -4,8 +4,8 @@ using XamarinToolkit.Interfaces.Models;
 
 namespace XamarinToolkit.Interfaces.Services
 {
-    public interface ICalendarService
+  /*  public interface ICalendarService
     {
         void StoreCalendarEvent(IInterview interviewToStore);
-    }
+    }*/
 }

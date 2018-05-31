@@ -7,8 +7,10 @@ using Android.Util;
 using Android.Widget;
 using Java.Util;
 using JobApp.Droid.Services;
+using JobApp.Shared.Interfaces.Services;
+using JobApp.Shared.Models;
 using XamarinToolkit.Interfaces.Models;
-using XamarinToolkit.Interfaces.Services;
+
 
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidCalendarService))]
 
@@ -16,9 +18,11 @@ namespace JobApp.Droid.Services
 {
     class AndroidCalendarService : ICalendarService
     {
-        public void StoreCalendarEvent(IInterview interviewToStore)
+        public void StoreCalendarEvent(Interview interviewToStore)
         {
             var context = MainActivity.Instance;
+            SaveEventIntent(context, interviewToStore.JobOffer.Position, interviewToStore.JobOffer.Note, interviewToStore.Date);
+           // SaveEventDialog(context, interviewToStore.JobOffer.Position, interviewToStore.JobOffer.Note, interviewToStore.Date, interviewToStore.Date + TimeSpan.FromHours(1));       
         }
 
         /*
@@ -43,10 +47,12 @@ namespace JobApp.Droid.Services
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtstart, PrepareTime(starTime));
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtend, PrepareTime(endTime));
 
-            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventTimezone, "UTC");
-            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "UTC");
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventTimezone, "GMT+2");
+            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "GMT+2");
+            
+            context.StartActivityForResult(calIntent, 7);
 
-            context.StartActivity(calIntent);
+
         }
 
         private void SaveEventIntent(
@@ -55,7 +61,7 @@ namespace JobApp.Droid.Services
             string eventDescription,
             DateTime starTime)
         {
-            SaveEventIntent(context, eventTitle, eventDescription, starTime,starTime + TimeSpan.FromHours(1));
+            SaveEventIntent(context, eventTitle, eventDescription, starTime, starTime + TimeSpan.FromHours(1));
         }
 
         /*
@@ -136,14 +142,14 @@ namespace JobApp.Droid.Services
         private long PrepareTime(DateTime time)
         {
             Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
-
+            var o = c.TimeInMillis;
             c.Set(Java.Util.CalendarField.DayOfMonth, time.Day);
             c.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
             c.Set(Java.Util.CalendarField.Minute, time.Minute);
             c.Set(Java.Util.CalendarField.Month, time.Month);
             c.Set(Java.Util.CalendarField.Year, time.Year);
-
-            return c.TimeInMillis;
+            var p = c.TimeInMillis;
+            return p;
         }
     }
 }

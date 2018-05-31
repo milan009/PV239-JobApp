@@ -5,7 +5,6 @@ using JobApp.Shared.ViewModels;
 using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinToolkit.Interfaces.Services;
 using XamarinToolkit.Interfaces.Storage;
 
 namespace JobApp.Shared.Views
@@ -42,5 +41,10 @@ namespace JobApp.Shared.Views
 	    {
 	        
 	    }
-	}
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.SaveToCalendar();
+        }
+    }
 }

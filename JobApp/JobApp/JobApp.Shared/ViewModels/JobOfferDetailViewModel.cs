@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Android.Text;
+
 using JobApp.Shared.DatabaseServices;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;

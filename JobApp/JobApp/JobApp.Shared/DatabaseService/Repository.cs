@@ -121,5 +121,11 @@ namespace JobApp.Shared.DatabaseServices
                 return false;
             }
         }
+
+        public async Task<TEntity> LoadChildrenOfEntityAsync(TEntity entity, bool recursive = false)
+        {
+            _database.GetChildrenAsync(entity, recursive).Wait();
+            return entity;
+        }
     }
 }
