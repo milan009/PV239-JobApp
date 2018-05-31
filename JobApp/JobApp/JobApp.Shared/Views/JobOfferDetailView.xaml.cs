@@ -40,9 +40,9 @@ namespace JobApp.Shared.Views
             Navigation.PushAsync(new InterviewListView(upcomingInterviews), true);
 	    }
 
-	    private void Save_Action(object sender, EventArgs e)
+	    private async void Save_Action(object sender, EventArgs e)
 	    {
-	        ViewModel.Save();
+	        await ViewModel.Save();
 	    }
 	}
 }

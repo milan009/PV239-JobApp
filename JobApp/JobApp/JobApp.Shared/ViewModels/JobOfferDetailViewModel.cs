@@ -34,11 +34,25 @@ namespace JobApp.Shared.ViewModels
                 OnPropertyChanged(nameof(NearestInterviewDate));
             }
         }
+
         public string SalaryValue
         {
             get => $"{JobOffer.OfferedPay.GetValueOrDefault()} Kč";
-            set => _jobOffer.OfferedPay = int.Parse(value.Split(' ').First());
+            set => setSalary(value);
         }
+
+        private void setSalary(string value)
+        {
+            try
+            {
+                _jobOffer.OfferedPay = int.Parse(value.Split(' ').First());
+            }
+            catch
+            {
+                _jobOffer.OfferedPay = 0;
+            }
+        }
+
         public DateTime DateValue
         {
             get => JobOffer.CommencementDate.GetValueOrDefault();
