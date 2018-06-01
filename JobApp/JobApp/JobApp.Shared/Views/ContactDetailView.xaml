@@ -64,7 +64,6 @@
             <Label Text="Telefón" 
                    Grid.Row="3" 
                    Grid.Column="0"
-                   Grid.ColumnSpan="2"
                    VerticalOptions="Center"/>
             <Entry Text="{Binding Path=DataModel.Phone, Mode=TwoWay}"
                    Keyboard="Telephone"
@@ -82,6 +81,7 @@
                Clicked="Save_Action"
                Grid.Row="4" 
                Grid.Column="0"
+               Grid.ColumnSpan="2"
                IsEnabled="True"
                VerticalOptions="Center"
             >
