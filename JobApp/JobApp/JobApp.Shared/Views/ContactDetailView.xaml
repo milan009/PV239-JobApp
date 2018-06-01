@@ -16,6 +16,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -79,7 +80,8 @@
                Text="Save contact"
                Clicked="Save_Action"
                Grid.Row="4" 
-               Grid.Column="1"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
                IsEnabled="True"
                VerticalOptions="Center"
             >
