@@ -10,7 +10,8 @@ namespace JobApp.Shared.Validators
      */
     public class PhoneValidatorBehavior : Behavior<Entry>
     {
-        const string PhoneRegex = @"^(+\d{3})?\d?\d{3}\s?\d{3}\s?\d{3}$";
+        const string PhoneRegex = @"^\(?([0-9]{3,4})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{3,4})$";
+        public bool IsValid { get; private set; } = true;
 
         protected override void OnAttachedTo(Entry bindable)
         {
@@ -20,9 +21,8 @@ namespace JobApp.Shared.Validators
 
         void HandleTextChanged(object sender, TextChangedEventArgs e)
         {
-            bool isValid = false;
-            isValid = (Regex.IsMatch(e.NewTextValue, PhoneRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
-            ((Entry)sender).TextColor = isValid ? Color.Default : Color.Red;
+            IsValid = (Regex.IsMatch(e.NewTextValue, PhoneRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
+            ((Entry)sender).TextColor = IsValid ? Color.Default : Color.Red;
         }
 
         protected override void OnDetachingFrom(Entry bindable)
