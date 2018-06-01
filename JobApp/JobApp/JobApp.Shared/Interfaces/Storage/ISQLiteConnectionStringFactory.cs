@@ -1,4 +1,4 @@
-﻿namespace XamarinToolkit.Interfaces.Storage
+﻿namespace JobApp.Shared.Interfaces.Storage
 {
     public interface ISQLiteConnectionStringFactory
     {

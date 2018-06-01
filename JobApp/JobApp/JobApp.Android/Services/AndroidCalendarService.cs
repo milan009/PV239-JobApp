@@ -7,10 +7,8 @@ using Android.Util;
 using Android.Widget;
 using Java.Util;
 using JobApp.Droid.Services;
-using JobApp.Shared.Interfaces;
 using JobApp.Shared.Interfaces.Services;
 using JobApp.Shared.Models;
-using XamarinToolkit.Interfaces.Models;
 
 
 [assembly: Xamarin.Forms.Dependency(typeof(AndroidCalendarService))]
@@ -45,15 +43,13 @@ namespace JobApp.Droid.Services
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Title, eventTitle);
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Description, eventDescription);
 
-            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtstart, PrepareTime(starTime));
-            calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.Dtend, PrepareTime(endTime));
+            calIntent.PutExtra("beginTime", PrepareTime(starTime));
+            calIntent.PutExtra("endTime", PrepareTime(endTime));
 
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventTimezone, "GMT+2");
             calIntent.PutExtra(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "GMT+2");
             
-            context.StartActivityForResult(calIntent, 7);
-
-
+            context.StartActivity(calIntent);
         }
 
         private void SaveEventIntent(
@@ -145,7 +141,7 @@ namespace JobApp.Droid.Services
             c.Set(CalendarField.DayOfMonth, time.Day);
             c.Set(CalendarField.HourOfDay, time.Hour);
             c.Set(CalendarField.Minute, time.Minute);
-            c.Set(CalendarField.Month, time.Month);
+            c.Set(CalendarField.Month, time.Month - 1); // Weird correction nescessary here
             c.Set(CalendarField.Year, time.Year);
 
             return c.TimeInMillis;

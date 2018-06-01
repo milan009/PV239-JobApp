@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using JobApp.Shared.Models;
-using XamarinToolkit.Interfaces.Models;
+﻿using JobApp.Shared.Models;
 
 namespace JobApp.Shared.Interfaces.Services
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using JobApp.Droid.DatabaseService;
-using XamarinToolkit.Interfaces.Storage;
+using JobApp.Shared.Interfaces.Storage;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SQLiteConnectionFactory))]
 

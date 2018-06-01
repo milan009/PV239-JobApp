@@ -1,16 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using JobApp.Shared.DatabaseServices;
+﻿using System.Threading.Tasks;
+using JobApp.Shared.Interfaces.Storage;
 using JobApp.Shared.Models;
-using JobApp.Shared.Services;
 using JobApp.Shared.Views;
 using SQLite;
 using Xamarin.Forms;
-using XamarinToolkit.Interfaces.Storage;
 
 namespace JobApp
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
         public const string DatabaseName = "JobAppDb";
 
@@ -23,10 +20,10 @@ namespace JobApp
 
 		protected override void OnStart ()
 		{
-            PopulateDb();
+		    InitDb();
 		}
 
-	    private static void PopulateDb()
+	    private static void PopulateMockDb()
 	    {
 	        var db = new SQLiteAsyncConnection(
 	            DependencyService.Get<ISQLiteConnectionStringFactory>().Create(DatabaseName));
@@ -56,16 +53,12 @@ namespace JobApp
 	        Task.WaitAll(createTasks);
 	    }
 
-        protected override void OnSleep ()
-		{
-			// Handle when your app sleeps
-		}
+	    private static void InitDb()
+	    {
+	        var db = new SQLiteAsyncConnection(
+	            DependencyService.Get<ISQLiteConnectionStringFactory>().Create(DatabaseName));
 
-		protected override void OnResume ()
-		{
-			// Handle when your app resumes
-		}
-
-
+	        db.CreateTablesAsync<Contact, JobOffer, Address, Company, Interview>().Wait();
+	    }
 	}
 }

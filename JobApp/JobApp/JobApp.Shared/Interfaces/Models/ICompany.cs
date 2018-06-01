@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace XamarinToolkit.Interfaces.Models
+namespace JobApp.Shared.Interfaces.Models
 {
     public interface ICompany
     {
-        String Name { get; set; }
         Guid Id { get; set; }
+        String Name { get; set; }
     }
 }

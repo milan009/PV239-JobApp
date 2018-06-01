@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using JobApp.Shared.DatabaseServices;
 using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
-using SQLite;
 using Xamarin.Forms;
-using XamarinToolkit.Interfaces.Storage;
 
 namespace JobApp.Shared.Views
 {
@@ -33,7 +27,6 @@ namespace JobApp.Shared.Views
             await ViewModel.Sycnhronize();
         }
 
-        //TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom
         private void Button_OnPressed(object sender, EventArgs e)
 	    {
 	        Navigation.PushAsync(new JobOfferDetailView(), true);

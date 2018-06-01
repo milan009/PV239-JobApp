@@ -2,12 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using JobApp.Shared.DatabaseServices;
+using JobApp.Shared.Interfaces.Storage;
 using JobApp.Shared.Models;
-using JobApp.Shared.Services;
 using SQLite;
 using Xamarin.Forms;
-using XamarinToolkit.Interfaces.Storage;
-using XamarinToolkit.Mvvm;
 
 namespace JobApp.Shared.ViewModels
 {
@@ -18,8 +16,6 @@ namespace JobApp.Shared.ViewModels
                 DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
 
         private ObservableCollection<JobOffer> _jobOffers;
-        private JobOffer _selectedJobOffer;
-
         private Command<JobOffer> _deleteJobOfferCommand;
 
         public ObservableCollection<JobOffer> JobOffers
@@ -29,15 +25,6 @@ namespace JobApp.Shared.ViewModels
             {
                 _jobOffers = value;
                 OnPropertyChanged(nameof(JobOffers));
-            }
-        }
-        public JobOffer SelectedJobOffer
-        {
-            get => _selectedJobOffer;
-            set
-            {
-                _selectedJobOffer = value;
-                OnPropertyChanged(nameof(SelectedJobOffer));
             }
         }
 

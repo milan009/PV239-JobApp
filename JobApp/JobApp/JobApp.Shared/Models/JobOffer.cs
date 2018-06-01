@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using JobApp.Shared.Interfaces.Models;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
-using XamarinToolkit.Interfaces.Models;
 
 namespace JobApp.Shared.Models
 {
@@ -23,8 +23,6 @@ namespace JobApp.Shared.Models
         public DateTime? CommencementDate { get; set; }
 
         public bool Saved { get; set; } = false;
-
-        //TO DO: Typ uvazku
 
         public String Note { get; set; }
 
