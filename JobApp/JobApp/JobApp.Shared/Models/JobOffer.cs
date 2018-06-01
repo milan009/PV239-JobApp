@@ -22,6 +22,8 @@ namespace JobApp.Shared.Models
 
         public DateTime? CommencementDate { get; set; }
 
+        public bool Saved { get; set; } = false;
+
         //TO DO: Typ uvazku
 
         public String Note { get; set; }

@@ -33,7 +33,8 @@ namespace JobApp.Shared.DatabaseServices
         {
             try
             {
-                return await _database.GetWithChildrenAsync<TEntity>(id);
+                var q = await _database.GetWithChildrenAsync<TEntity>(id);
+                return q;
             }
             catch
             {
@@ -96,11 +97,11 @@ namespace JobApp.Shared.DatabaseServices
             }
         }
 
-        public async Task<bool> TryDeleteEntityAsync(TEntity entity)
+        public async Task<bool> TryDeleteEntityAsync(TEntity entity, bool recursive = false)
         {
             try
             {
-                await _database.DeleteAsync(entity);
+                await _database.DeleteAsync(entity, recursive);
                 return true;
             }
             catch

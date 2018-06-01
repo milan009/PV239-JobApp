@@ -23,7 +23,7 @@ namespace JobApp.Shared.Views
 
         private void OnOfferLoaded(object sender, EventArgs e)
         {
-        
+            
         }
 
         public void OnContactAdded(object source, AddContactEventArgs e)
@@ -39,20 +39,21 @@ namespace JobApp.Shared.Views
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
 	    {
-	        //var upcomingInterviews = ViewModel.JobOffer?.Interviews?.Select(interview => interview.Id).ToArray();
-            Navigation.PushAsync(new InterviewListView(ViewModel.DataModel?.Id), true);
+            var interviewListPage = new InterviewListView(ViewModel.DataModel?.Id);
+            interviewListPage.InterviewListViewClosing += InterviewListPage_InterviewListViewClosing;
+
+            Navigation.PushAsync(interviewListPage, true); 
 	    }
 
-	    private async void Save_Action(object sender, EventArgs e)
+        private void InterviewListPage_InterviewListViewClosing(object sender, System.Collections.Generic.List<Models.Interview> e)
+        {
+            ViewModel.SetInterviews(e);
+        }
+
+        private async void Save_Action(object sender, EventArgs e)
 	    {
 	        await ViewModel.Save();
             await Navigation.PopAsync();
 	    }
-
-      /*  protected override void OnAppearing()
-        {
-            ViewModel.Sync();
-            base.OnAppearing();
-        }*/
     }
 }
