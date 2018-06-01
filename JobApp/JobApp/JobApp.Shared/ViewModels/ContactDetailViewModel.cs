@@ -66,6 +66,5 @@ namespace JobApp.Shared.ViewModels
                 DataModel = new Contact();
             }
         }
-
     } 
 }

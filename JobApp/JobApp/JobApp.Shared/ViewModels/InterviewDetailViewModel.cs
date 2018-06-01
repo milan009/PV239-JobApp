@@ -51,22 +51,17 @@ namespace JobApp.Shared.ViewModels
             if (DataModel.Id == default(Guid))
             {
                 DataModel.Id = _guidService.GenerateNewGuid();
+                await SaveToCalendar();
                 return await _repository.TryAddEntityAsync(DataModel);
             }
 
             return await _repository.TryUpdateEntityAsync(DataModel);
         }
 
-        public void SaveToCalendar()
+        public async Task SaveToCalendar()
         {
-            var r = DataModel.JobOffer;
-            var q = _repository.LoadChildrenOfEntityAsync(DataModel);
-            q.Wait();
-
-            var o = DataModel.JobOffer;
-            var p = q.Result;
+            await _repository.LoadChildrenOfEntityAsync(DataModel);
             _calendarService.StoreCalendarEvent(DataModel);
-
         }
 	}
 }
