@@ -11,22 +11,17 @@ using XamarinToolkit.Mvvm;
 
 namespace JobApp.Shared.ViewModels
 {
-    public class JobOfferDetailViewModel : ViewModelBase
+    public class JobOfferDetailViewModel : ViewModelBaseGeneric<JobOffer>
     {
         private readonly GuidService _guidService = new GuidService();
-        private readonly Repository<JobOffer> _repository = new Repository<JobOffer>(
-            new SQLiteAsyncConnection(
-                DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
 
-        private JobOffer _jobOffer = new JobOffer();
-
-        public JobOffer JobOffer
+        public override JobOffer DataModel
         {
-            get => _jobOffer;
+            get => _dataModel;
             set
             {
-                _jobOffer = value;
-                OnPropertyChanged(nameof(JobOffer));
+                _dataModel = value;
+                OnPropertyChanged(nameof(DataModel));
                 OnPropertyChanged(nameof(SalaryValue));
                 OnPropertyChanged(nameof(SalaryVisible));
                 OnPropertyChanged(nameof(DateValue));
@@ -37,34 +32,34 @@ namespace JobApp.Shared.ViewModels
 
         public string SalaryValue
         {
-            get => $"{JobOffer.OfferedPay.GetValueOrDefault()} Kč";
-            set => setSalary(value);
+            get => $"{DataModel.OfferedPay.GetValueOrDefault()} Kč";
+            set => SetSalary(value);
         }
 
-        private void setSalary(string value)
+        private void SetSalary(string value)
         {
             try
             {
-                _jobOffer.OfferedPay = int.Parse(value.Split(' ').First());
+                _dataModel.OfferedPay = int.Parse(value.Split(' ').First());
             }
             catch
             {
-                _jobOffer.OfferedPay = 0;
+                _dataModel.OfferedPay = 0;
             }
         }
 
         public DateTime DateValue
         {
-            get => JobOffer.CommencementDate.GetValueOrDefault();
-            set => _jobOffer.CommencementDate = value;
+            get => DataModel.CommencementDate.GetValueOrDefault();
+            set => _dataModel.CommencementDate = value;
         }
 
-        public string ContactName => JobOffer.Contact?.Name ?? "<Žádný kontakt>";
+        public string ContactName => DataModel.Contact?.Name ?? "<Žádný kontakt>";
 
         public void SetContact(Contact contact)
         {
-            _jobOffer.Contact = contact;
-            _jobOffer.ContactId = contact.Id;
+            _dataModel.Contact = contact;
+            _dataModel.ContactId = contact.Id;
             OnPropertyChanged(nameof(ContactName));
         }
 
@@ -72,7 +67,7 @@ namespace JobApp.Shared.ViewModels
         {
             get
             {
-                var upcomingInterviews = JobOffer
+                var upcomingInterviews = DataModel
                         .Interviews?
                         .Where(interview => interview.Date > DateTime.Now);
 
@@ -81,34 +76,20 @@ namespace JobApp.Shared.ViewModels
             }
         }
 
-        public bool SalaryVisible => JobOffer.OfferedPay.HasValue;
-        public bool DateVisible => JobOffer.CommencementDate.HasValue;
+        public bool SalaryVisible => DataModel.OfferedPay.HasValue;
+        public bool DateVisible => DataModel.CommencementDate.HasValue;
 
-        public event EventHandler JobOfferLoaded;
-
-        public JobOfferDetailViewModel(Guid? offerGuid = null)
-        {
-            if (offerGuid.HasValue)
-            {
-                _repository
-                    .TryGetByIdWithChildrenAsync(offerGuid.Value)
-                    .ContinueWith(task =>
-                    {
-                        JobOffer = task.Result;
-                        JobOfferLoaded.Invoke(this, null);
-                    });
-            }
-        }
+        public JobOfferDetailViewModel(Guid? offerGuid = null) : base(offerGuid) { }
 
         public async Task<bool> Save()
         {
-            if (JobOffer.Id == default(Guid))
+            if (DataModel.Id == default(Guid))
             {
-                JobOffer.Id = _guidService.GenerateNewGuid();
-                return await _repository.TryAddEntityAsync(JobOffer);
+                DataModel.Id = _guidService.GenerateNewGuid();
+                return await _repository.TryAddEntityAsync(DataModel);
             }
 
-            return await _repository.TryUpdateEntityAsync(JobOffer);
+            return await _repository.TryUpdateEntityAsync(DataModel);
         }
     }
 }

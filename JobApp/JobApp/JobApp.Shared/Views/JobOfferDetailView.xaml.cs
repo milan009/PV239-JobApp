@@ -15,7 +15,7 @@ namespace JobApp.Shared.Views
         public JobOfferDetailView (Guid? offerGuid = null)
 		{
 		    ViewModel = new JobOfferDetailViewModel(offerGuid);
-            ViewModel.JobOfferLoaded += OnOfferLoaded;
+            ViewModel.Loaded += OnOfferLoaded;
 
 		    InitializeComponent();
 		    BindingContext = ViewModel;
@@ -32,7 +32,7 @@ namespace JobApp.Shared.Views
 
 	    private void Contact_OnPressed(object sender, EventArgs e)
 	    {
-            var contactPage = new ContactDetailView(ViewModel.JobOffer.ContactId);
+            var contactPage = new ContactDetailView(ViewModel.DataModel.ContactId);
             contactPage.AddContactToJobOffer += OnContactAdded;
             Navigation.PushAsync(contactPage, true);
 	    }
@@ -40,7 +40,7 @@ namespace JobApp.Shared.Views
 	    private void Interview_OnPressed(object sender, EventArgs e)
 	    {
 	        //var upcomingInterviews = ViewModel.JobOffer?.Interviews?.Select(interview => interview.Id).ToArray();
-            Navigation.PushAsync(new InterviewListView(ViewModel.JobOffer?.Id), true);
+            Navigation.PushAsync(new InterviewListView(ViewModel.DataModel?.Id), true);
 	    }
 
 	    private async void Save_Action(object sender, EventArgs e)

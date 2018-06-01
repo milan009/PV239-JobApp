@@ -5,7 +5,7 @@
              Title="Detail pracovnej ponuky">
 	
 	<ContentPage.ToolbarItems>
-		<ToolbarItem Order="Primary" Priority="0" Icon="save.png" Text="Save" Clicked="Save_Action"/>
+		<ToolbarItem Order="Primary" Priority="0" Icon="save.png" Text="Save" Clicked="Save_Action" />
 	</ContentPage.ToolbarItems>
 
 	<ContentPage.Content>
@@ -24,12 +24,12 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
+            
             <Label Text="Pracovná pozícia" 
                    Grid.Row="0" 
                    Grid.Column="0"
                    VerticalOptions="Center"/>
-            <Entry Text="{Binding Path=JobOffer.Position}" 
+            <Entry Text="{Binding Path=DataModel.Position}" 
                    Grid.Row="1" 
                    Grid.Column="0"
                    Grid.ColumnSpan="2"
@@ -106,7 +106,7 @@
                    Grid.Column="1"
                    VerticalOptions="Center"/>
 
-			<Editor Text="{Binding Path=JobOffer.Note}"
+            <Editor Text="{Binding Path=DataModel.Note}"
 			        Grid.Row="7"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"/>
