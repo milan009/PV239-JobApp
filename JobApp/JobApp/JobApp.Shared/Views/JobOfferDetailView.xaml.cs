@@ -39,8 +39,8 @@ namespace JobApp.Shared.Views
 
 	    private void Interview_OnPressed(object sender, EventArgs e)
 	    {
-	        var upcomingInterviews = ViewModel.JobOffer.Interviews.Select(interview => interview.Id).ToArray();
-            Navigation.PushAsync(new InterviewListView(upcomingInterviews), true);
+	        //var upcomingInterviews = ViewModel.JobOffer?.Interviews?.Select(interview => interview.Id).ToArray();
+            Navigation.PushAsync(new InterviewListView(ViewModel.JobOffer?.Id), true);
 	    }
 
 	    private async void Save_Action(object sender, EventArgs e)

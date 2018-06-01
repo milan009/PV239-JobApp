@@ -15,9 +15,9 @@ namespace JobApp.Shared.Views
         public InterviewDetailViewModel ViewModel { get; set; }
 	  //  public ICalendarService CalendarService { get; set; }
 
-		public InterviewDetailView(Guid? interviewGuid = null)
+		public InterviewDetailView(Guid? jobOfferGuid, Guid? interviewGuid = null)
 		{
-		    ViewModel = new InterviewDetailViewModel(interviewGuid);
+		    ViewModel = new InterviewDetailViewModel(jobOfferGuid ?? default(Guid), interviewGuid);
 		    ViewModel.Loaded += OnInterviewLoaded;
 			InitializeComponent();
             BindingContext = ViewModel;

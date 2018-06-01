@@ -11,9 +11,9 @@ namespace JobApp.Shared.Views
 	{
         public InterviewListViewModel ViewModel { get; set; }
 
-		public InterviewListView(Guid[] interviewGuids = null)
+		public InterviewListView(Guid? jobOfferId = null)
 		{
-		    ViewModel = new InterviewListViewModel(interviewGuids);
+		    ViewModel = new InterviewListViewModel(jobOfferId);
 
 			InitializeComponent();
             BindingContext = ViewModel;
@@ -21,12 +21,12 @@ namespace JobApp.Shared.Views
 
 	    private void Button_OnPressed(object sender, EventArgs e)
 	    {
-	        Navigation.PushAsync(new InterviewDetailView(), true);
+	        Navigation.PushAsync(new InterviewDetailView(ViewModel.JobInterviewId), true);
         }
 
 	    private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 	    {
-	        Navigation.PushAsync(new InterviewDetailView(((Interview)e.SelectedItem).Id), true);
+	        Navigation.PushAsync(new InterviewDetailView(ViewModel.JobInterviewId, ((Interview)e.SelectedItem).Id), true);
         }
 
 		protected async override void OnAppearing()

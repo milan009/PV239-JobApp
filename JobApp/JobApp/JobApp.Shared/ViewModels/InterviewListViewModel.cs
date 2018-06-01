@@ -24,6 +24,8 @@ namespace JobApp.Shared.ViewModels
             }
         }
 
+        public Guid? JobInterviewId { get; }
+
         private readonly Repository<Interview> _repository = new Repository<Interview>(
             new SQLiteAsyncConnection(
                 DependencyService.Get<ISQLiteConnectionStringFactory>().Create(App.DatabaseName)));
@@ -31,19 +33,29 @@ namespace JobApp.Shared.ViewModels
         public event EventHandler InterviewsLoaded;
 
         // TODO: Only load those nescessary
-        public InterviewListViewModel(Guid[] guids = null)
+        public InterviewListViewModel(Guid? jobOfferId = null)
         {
-            _repository.TryGetMatchingAsync(interview => guids.Contains(interview.Id))
-                .ContinueWith(task =>
+            JobInterviewId = jobOfferId;
+
+            if (jobOfferId.HasValue)
             {
-                Interviews = new ObservableCollection<Interview>(task.Result);
+                _repository.TryGetMatchingAsync(interview => interview.JobOfferId == jobOfferId)
+                    .ContinueWith(task =>
+                    {
+                        Interviews = new ObservableCollection<Interview>(task.Result);
+                        InterviewsLoaded?.Invoke(this, null);
+                    });
+            }
+            else
+            {
+                Interviews = new ObservableCollection<Interview>();
                 InterviewsLoaded?.Invoke(this, null);
-            });
+            }
         }
 
         public async Task Sycnhronize()
         {
-            Interviews = new ObservableCollection<Interview>(await _repository.TryGetAllAsync());
+            Interviews = new ObservableCollection<Interview>(await _repository.TryGetMatchingAsync(interview => interview.JobOfferId == JobInterviewId));
             InterviewsLoaded?.Invoke(this, null);
         }
 

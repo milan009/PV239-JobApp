@@ -2,15 +2,21 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using JobApp.Shared.Interfaces;
+using JobApp.Shared.Interfaces.Services;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;
+using Xamarin.Forms;
+
 
 namespace JobApp.Shared.ViewModels
 {
     public class InterviewDetailViewModel : ViewModelBaseGeneric<Interview>
     {
 	    private readonly GuidService _guidService = new GuidService();
-		public override Interview DataModel
+        private readonly ICalendarService _calendarService = DependencyService.Get<ICalendarService>();
+
+        public override Interview DataModel
         {
             get => _dataModel;
             set
@@ -24,7 +30,7 @@ namespace JobApp.Shared.ViewModels
 
         public DateTime Date
         {
-            get => _dataModel.Date;
+            get => _dataModel.Date - _dataModel.Date.TimeOfDay;
             set => _dataModel.Date = value + Time;
         }
 
@@ -34,7 +40,15 @@ namespace JobApp.Shared.ViewModels
             set => _dataModel.Date = Date + value;
         }
 
-        private ICalendarService _calendarService = DependencyService.Get<ICalendarService>();
+        
+        public InterviewDetailViewModel(Guid jobOffer, Guid? interviewId) : base(interviewId)
+        {
+            // Links new interview to job offer
+            if (!interviewId.HasValue || DataModel.JobOfferId == default(Guid))
+            {
+                DataModel.JobOfferId = jobOffer;
+            }
+        }
 
         public void SaveToCalendar()
         {
@@ -45,12 +59,10 @@ namespace JobApp.Shared.ViewModels
             var o = DataModel.JobOffer;
             var p = q.Result;
             _calendarService.StoreCalendarEvent(DataModel);
-            
+
         }
 
-        public InterviewDetailViewModel(Guid? id) : base(id) {}
-
-	    public async Task<bool> Save()
+        public async Task<bool> Save()
 	    {
 		    if (DataModel.Id == default(Guid))
 		    {
