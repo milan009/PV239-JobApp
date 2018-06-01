@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using JobApp.Shared.DatabaseServices;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;
-using SQLite;
-using Xamarin.Forms;
-using XamarinToolkit.Interfaces.Storage;
-using XamarinToolkit.Mvvm;
 
 namespace JobApp.Shared.ViewModels
 {
@@ -38,18 +32,6 @@ namespace JobApp.Shared.ViewModels
             set => SetSalary(value);
         }
 
-        private void SetSalary(string value)
-        {
-            try
-            {
-                _dataModel.OfferedPay = int.Parse(value.Split(' ').First());
-            }
-            catch
-            {
-                _dataModel.OfferedPay = 0;
-            }
-        }
-
         public DateTime DateValue
         {
             get => DataModel.CommencementDate.GetValueOrDefault();
@@ -57,19 +39,6 @@ namespace JobApp.Shared.ViewModels
         }
 
         public string ContactName => DataModel.Contact?.Name ?? "<Žádný kontakt>";
-
-        public void SetContact(Contact contact)
-        {
-            _dataModel.Contact = contact;
-            _dataModel.ContactId = contact.Id;
-            OnPropertyChanged(nameof(ContactName));
-        }
-
-        public void SetInterviews(List<Interview> interviews)
-        {
-            _dataModel.Interviews = interviews;
-            OnPropertyChanged(nameof(NearestInterviewDate));
-        }
 
         public string NearestInterviewDate
         {
@@ -94,13 +63,40 @@ namespace JobApp.Shared.ViewModels
 
         public async Task<bool> Save()
         {
-            DataModel.Saved = DataModel.Saved ? await _repository.TryUpdateEntityAsync(DataModel) : await _repository.TryAddEntityAsync(DataModel);
+            DataModel.Saved = DataModel.Saved ? 
+                await _repository.TryUpdateEntityAsync(DataModel) : 
+                await _repository.TryAddEntityAsync(DataModel);
             return DataModel.Saved;
         }
 
         public async Task<bool> Delete(bool recursive = false)
         {
             return await _repository.TryDeleteEntityAsync(DataModel, recursive);
+        }
+
+        public void SetContact(Contact contact)
+        {
+            _dataModel.Contact = contact;
+            _dataModel.ContactId = contact.Id;
+            OnPropertyChanged(nameof(ContactName));
+        }
+
+        public void SetInterviews(List<Interview> interviews)
+        {
+            _dataModel.Interviews = interviews;
+            OnPropertyChanged(nameof(NearestInterviewDate));
+        }
+
+        private void SetSalary(string value)
+        {
+            try
+            {
+                _dataModel.OfferedPay = int.Parse(value.Split(' ').First());
+            }
+            catch
+            {
+                _dataModel.OfferedPay = 0;
+            }
         }
     }
 }

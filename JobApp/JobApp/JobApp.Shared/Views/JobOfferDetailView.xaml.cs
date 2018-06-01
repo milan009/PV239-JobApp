@@ -2,7 +2,6 @@
 using JobApp.Shared.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Linq;
 using JobApp.Shared.Events;
 
 namespace JobApp.Shared.Views

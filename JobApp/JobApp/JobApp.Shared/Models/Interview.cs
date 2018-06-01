@@ -1,7 +1,7 @@
 ﻿using System;
+using JobApp.Shared.Interfaces.Models;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
-using XamarinToolkit.Interfaces.Models;
 
 namespace JobApp.Shared.Models
 {

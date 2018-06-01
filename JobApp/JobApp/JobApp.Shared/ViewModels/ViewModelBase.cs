@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace XamarinToolkit.Mvvm
+namespace JobApp.Shared.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

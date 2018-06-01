@@ -33,8 +33,7 @@ namespace JobApp.Shared.DatabaseServices
         {
             try
             {
-                var q = await _database.GetWithChildrenAsync<TEntity>(id);
-                return q;
+                return await _database.GetWithChildrenAsync<TEntity>(id);
             }
             catch
             {

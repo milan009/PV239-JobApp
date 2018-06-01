@@ -1,12 +1,13 @@
 ﻿using System;
 
-namespace XamarinToolkit.Interfaces.Models
+namespace JobApp.Shared.Interfaces.Models
 {
     public interface IInterview
     {
+        Guid Id { get; set; }
         Guid JobOfferId { get; set; }
+
         DateTime Date { get; set; }
         int Round { get; set; }
-        Guid Id { get; set; }
     }
 }

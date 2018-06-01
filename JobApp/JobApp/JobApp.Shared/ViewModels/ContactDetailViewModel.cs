@@ -9,6 +9,7 @@ namespace JobApp.Shared.ViewModels
     public class ContactDetailViewModel : ViewModelBaseGeneric<Contact>
     {
         private GuidService _guidService = new GuidService();
+
         public override Contact DataModel { 
         get => _dataModel;
             set
@@ -23,36 +24,17 @@ namespace JobApp.Shared.ViewModels
         public string FirstName
         {
             get => DataModel?.Name?.Split(' ').First() ?? "";
-            set => setFirstName(value);
-        }
-
-        private void setFirstName(string value)
-        {
-            checkDataModel();
-            DataModel.Name = $"{value} {LastName}";
+            set => SetFirstName(value);
         }
 
         public string LastName
         {
             get => DataModel?.Name?.Split(' ').Last() ?? "";
-            set => setLastName(value);
-        }
-
-        private void setLastName(string value)
-        {
-            checkDataModel();
-            DataModel.Name = $"{FirstName} {value}";
-        }
-
-        private void checkDataModel()
-        {
-            if (DataModel == null)
-            {
-                DataModel = new Contact();
-            }
+            set => SetLastName(value);
         }
 
         public ContactDetailViewModel(Guid? id) : base(id) { }
+
 
         public async Task<bool> Save()
         {
@@ -64,5 +46,26 @@ namespace JobApp.Shared.ViewModels
 
             return await _repository.TryUpdateEntityAsync(DataModel);
         }
+
+        private void SetFirstName(string value)
+        {
+            CheckDataModel();
+            DataModel.Name = $"{value} {LastName}";
+        }
+
+        private void SetLastName(string value)
+        {
+            CheckDataModel();
+            DataModel.Name = $"{FirstName} {value}";
+        }
+
+        private void CheckDataModel()
+        {
+            if (DataModel == null)
+            {
+                DataModel = new Contact();
+            }
+        }
+
     } 
 }

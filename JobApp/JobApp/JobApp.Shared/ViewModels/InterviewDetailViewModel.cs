@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using JobApp.Shared.Interfaces;
 using JobApp.Shared.Interfaces.Services;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;
@@ -40,7 +37,6 @@ namespace JobApp.Shared.ViewModels
             set => _dataModel.Date = Date + value;
         }
 
-        
         public InterviewDetailViewModel(Guid jobOffer, Guid? interviewId) : base(interviewId)
         {
             // Links new interview to job offer
@@ -48,6 +44,17 @@ namespace JobApp.Shared.ViewModels
             {
                 DataModel.JobOfferId = jobOffer;
             }
+        }
+
+        public async Task<bool> Save()
+        {
+            if (DataModel.Id == default(Guid))
+            {
+                DataModel.Id = _guidService.GenerateNewGuid();
+                return await _repository.TryAddEntityAsync(DataModel);
+            }
+
+            return await _repository.TryUpdateEntityAsync(DataModel);
         }
 
         public void SaveToCalendar()
@@ -61,16 +68,5 @@ namespace JobApp.Shared.ViewModels
             _calendarService.StoreCalendarEvent(DataModel);
 
         }
-
-        public async Task<bool> Save()
-	    {
-		    if (DataModel.Id == default(Guid))
-		    {
-			    DataModel.Id = _guidService.GenerateNewGuid();
-			    return await _repository.TryAddEntityAsync(DataModel);
-		    }
-
-		    return await _repository.TryUpdateEntityAsync(DataModel);
-	    }
 	}
 }

@@ -1,11 +1,7 @@
 ﻿using System;
-using JobApp.Shared.DatabaseServices;
-using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
-using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinToolkit.Interfaces.Storage;
 
 namespace JobApp.Shared.Views
 {

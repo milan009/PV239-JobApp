@@ -91,12 +91,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\XamarinToolkit\XamarinToolkit.csproj">
-      <Project>{6e7f5541-90c8-407c-8843-0546ca7d69eb}</Project>
-      <Name>XamarinToolkit</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\add.png" />
   </ItemGroup>
   <ItemGroup>
