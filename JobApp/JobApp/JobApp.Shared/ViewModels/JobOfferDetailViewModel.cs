@@ -92,9 +92,12 @@ namespace JobApp.Shared.ViewModels
             return await _repository.TryUpdateEntityAsync(DataModel);
         }
 
-      /*  public void Sync()
+        public async void Synchronize()
         {
-            DataModel = 
-        }*/
+            if (DataModel.Id != default(Guid))
+            {
+                DataModel = await _repository.TryGetByIdWithChildrenAsync(DataModel.Id);
+            }
+        }
     }
 }

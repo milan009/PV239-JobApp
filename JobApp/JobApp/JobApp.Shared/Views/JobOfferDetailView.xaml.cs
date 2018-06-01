@@ -23,7 +23,7 @@ namespace JobApp.Shared.Views
 
         private void OnOfferLoaded(object sender, EventArgs e)
         {
-        
+            
         }
 
         public void OnContactAdded(object source, AddContactEventArgs e)
@@ -49,10 +49,10 @@ namespace JobApp.Shared.Views
             await Navigation.PopAsync();
 	    }
 
-      /*  protected override void OnAppearing()
+        protected override void OnAppearing()
         {
-            ViewModel.Sync();
             base.OnAppearing();
-        }*/
+            ViewModel.Synchronize();
+        }
     }
 }
