@@ -48,5 +48,11 @@ namespace JobApp.Shared.Views
 	        await ViewModel.Save();
             await Navigation.PopAsync();
 	    }
-	}
+
+      /*  protected override void OnAppearing()
+        {
+            ViewModel.Sync();
+            base.OnAppearing();
+        }*/
+    }
 }

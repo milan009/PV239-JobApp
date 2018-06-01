@@ -79,7 +79,7 @@ namespace JobApp.Shared.ViewModels
         public bool SalaryVisible => DataModel.OfferedPay.HasValue;
         public bool DateVisible => DataModel.CommencementDate.HasValue;
 
-        public JobOfferDetailViewModel(Guid? offerGuid = null) : base(offerGuid) { }
+        public JobOfferDetailViewModel(Guid? offerGuid = null) : base(offerGuid, true) { }
 
         public async Task<bool> Save()
         {
@@ -91,5 +91,10 @@ namespace JobApp.Shared.ViewModels
 
             return await _repository.TryUpdateEntityAsync(DataModel);
         }
+
+      /*  public void Sync()
+        {
+            DataModel = 
+        }*/
     }
 }

@@ -17,14 +17,27 @@ namespace JobApp.Shared.ViewModels
 
         public event EventHandler Loaded;
 
-        protected ViewModelBaseGeneric(Guid? id)
+        protected ViewModelBaseGeneric(Guid? id, bool getWithChildren = false)
         {
-            if(id.HasValue)
+            if (!id.HasValue)
+                return;
+
+            if (getWithChildren)
+            {
+                _repository.TryGetByIdWithChildrenAsync(id.Value).ContinueWith(task =>
+                {
+                    DataModel = task.Result;
+                    Loaded?.Invoke(this, null);
+                });
+            }
+            else
+            {
                 _repository.TryGetByIdAsync(id.Value).ContinueWith(task =>
                 {
                     DataModel = task.Result;
                     Loaded?.Invoke(this, null);
                 });
+            }
         }
 
         public virtual TDataModelType DataModel
