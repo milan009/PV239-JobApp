@@ -16,6 +16,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -63,6 +64,7 @@
             <Label Text="Telefón" 
                    Grid.Row="3" 
                    Grid.Column="0"
+                   Grid.ColumnSpan="2"
                    VerticalOptions="Center"/>
             <Entry Text="{Binding Path=DataModel.Phone, Mode=TwoWay}"
                    Keyboard="Telephone"
@@ -79,7 +81,7 @@
                Text="Save contact"
                Clicked="Save_Action"
                Grid.Row="4" 
-               Grid.Column="1"
+               Grid.Column="0"
                IsEnabled="True"
                VerticalOptions="Center"
             >

@@ -164,12 +164,6 @@
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\XamarinToolkit\XamarinToolkit.csproj">
-      <Project>{6E7F5541-90C8-407C-8843-0546CA7D69EB}</Project>
-      <Name>XamarinToolkit</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\JobApp.Shared\JobApp.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

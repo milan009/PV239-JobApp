@@ -1,10 +1,10 @@
 ﻿using System;
 using Windows.ApplicationModel.Appointments;
 using Windows.Foundation;
-using Windows.System;
+using JobApp.Shared.Interfaces.Models;
+using JobApp.Shared.Interfaces.Services;
 using JobApp.UWP.Services;
-using XamarinToolkit.Interfaces.Models;
-using XamarinToolkit.Interfaces.Services;
+using JobApp.Shared.Models;
 
 [assembly: Xamarin.Forms.Dependency(typeof(UWPCalendarService))]
 
@@ -12,32 +12,19 @@ namespace JobApp.UWP.Services
 {
     class UWPCalendarService : ICalendarService
     {
-        public async void StoreCalendarEvent(IInterview interviewToStore)
+        public async void StoreCalendarEvent(Interview interviewToStore)
         {
-            var appointment = new Appointment
+          /* There were some issues in getting this to work
+           var appointment = new Appointment
             {
-                StartTime = DateTimeOffset.Now + TimeSpan.FromHours(1),
+                StartTime = interviewToStore.Date,
                 Duration = TimeSpan.FromHours(1),
-                Subject = "Test Appointment",
-                Location = "Weherever",
-                Details = "Some more details"
+                Subject = interviewToStore.JobOffer.Position,
+                Details = interviewToStore.JobOffer.Note
             };
 
-            var id = await AppointmentManager.ShowAddAppointmentAsync(
-                appointment, new Rect(0, 0, 100, 100), Windows.UI.Popups.Placement.Default);
+            await AppointmentManager.ShowAddAppointmentAsync(
+                appointment, new Rect(0, 0, 100, 100), Windows.UI.Popups.Placement.Default);*/
         }
-
-      /*  private long PrepareTime(DateTime time)
-        {
-            Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
-
-            c.Set(Java.Util.CalendarField.DayOfMonth, time.Day);
-            c.Set(Java.Util.CalendarField.HourOfDay, time.Hour);
-            c.Set(Java.Util.CalendarField.Minute, time.Minute);
-            c.Set(Java.Util.CalendarField.Month, time.Month);
-            c.Set(Java.Util.CalendarField.Year, time.Year);
-
-            return c.TimeInMillis;
-        }*/
     }
 }
