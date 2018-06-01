@@ -7,6 +7,7 @@ using Android.Util;
 using Android.Widget;
 using Java.Util;
 using JobApp.Droid.Services;
+using JobApp.Shared.Interfaces;
 using JobApp.Shared.Interfaces.Services;
 using JobApp.Shared.Models;
 using XamarinToolkit.Interfaces.Models;

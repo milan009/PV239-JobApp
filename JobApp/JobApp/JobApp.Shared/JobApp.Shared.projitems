@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\DatabaseSetUp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DatabaseService\Repository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Events\AddContactEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\Services\ICalendarService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Address.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BasicObject.cs" />
