@@ -33,11 +33,6 @@ namespace JobApp.Shared.Views
             await ViewModel.Sycnhronize();
         }
 
-        protected override bool OnBackButtonPressed()
-        {
-            return base.OnBackButtonPressed();
-        }
-
         //TODO: toto by malo byt iba docasne, nahradit nativnym tlacitkom
         private void Button_OnPressed(object sender, EventArgs e)
 	    {

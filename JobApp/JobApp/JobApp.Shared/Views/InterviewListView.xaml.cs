@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
 using Xamarin.Forms;
@@ -10,6 +11,8 @@ namespace JobApp.Shared.Views
 	public partial class InterviewListView : ContentPage
 	{
         public InterviewListViewModel ViewModel { get; set; }
+
+	    public event EventHandler<List<Interview>> InterviewListViewClosing;
 
 		public InterviewListView(Guid? jobOfferId = null)
 		{
@@ -34,5 +37,11 @@ namespace JobApp.Shared.Views
 			base.OnAppearing();
 			await ViewModel.Sycnhronize();
 		}
-	}
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            InterviewListViewClosing?.Invoke(this, new List<Interview>(ViewModel.Interviews));
+        }
+    }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using JobApp.Shared.DatabaseServices;
@@ -63,6 +65,12 @@ namespace JobApp.Shared.ViewModels
             OnPropertyChanged(nameof(ContactName));
         }
 
+        public void SetInterviews(List<Interview> interviews)
+        {
+            _dataModel.Interviews = interviews;
+            OnPropertyChanged(nameof(NearestInterviewDate));
+        }
+
         public string NearestInterviewDate
         {
             get
@@ -79,25 +87,20 @@ namespace JobApp.Shared.ViewModels
         public bool SalaryVisible => DataModel.OfferedPay.HasValue;
         public bool DateVisible => DataModel.CommencementDate.HasValue;
 
-        public JobOfferDetailViewModel(Guid? offerGuid = null) : base(offerGuid, true) { }
+        public JobOfferDetailViewModel(Guid? offerGuid = null) : base(offerGuid, true)
+        {
+            DataModel.Id = _guidService.GenerateNewGuid();
+        }
 
         public async Task<bool> Save()
         {
-            if (DataModel.Id == default(Guid))
-            {
-                DataModel.Id = _guidService.GenerateNewGuid();
-                return await _repository.TryAddEntityAsync(DataModel);
-            }
-
-            return await _repository.TryUpdateEntityAsync(DataModel);
+            DataModel.Saved = DataModel.Saved ? await _repository.TryUpdateEntityAsync(DataModel) : await _repository.TryAddEntityAsync(DataModel);
+            return DataModel.Saved;
         }
 
-        public async void Synchronize()
+        public async Task<bool> Delete(bool recursive = false)
         {
-            if (DataModel.Id != default(Guid))
-            {
-                DataModel = await _repository.TryGetByIdWithChildrenAsync(DataModel.Id);
-            }
+            return await _repository.TryDeleteEntityAsync(DataModel, recursive);
         }
     }
 }
