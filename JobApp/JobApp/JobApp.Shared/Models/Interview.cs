@@ -11,7 +11,7 @@ namespace JobApp.Shared.Models
         [ForeignKey(typeof(JobOffer))]
         public Guid JobOfferId { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
         public int Round { get; set; }
 

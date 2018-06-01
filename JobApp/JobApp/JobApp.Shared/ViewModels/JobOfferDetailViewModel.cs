@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using JobApp.Shared.DatabaseServices;
 using JobApp.Shared.Models;
 using JobApp.Shared.Services;
@@ -36,11 +34,25 @@ namespace JobApp.Shared.ViewModels
                 OnPropertyChanged(nameof(NearestInterviewDate));
             }
         }
+
         public string SalaryValue
         {
             get => $"{JobOffer.OfferedPay.GetValueOrDefault()} Kč";
-            set => _jobOffer.OfferedPay = int.Parse(value.Split(' ').First());
+            set => setSalary(value);
         }
+
+        private void setSalary(string value)
+        {
+            try
+            {
+                _jobOffer.OfferedPay = int.Parse(value.Split(' ').First());
+            }
+            catch
+            {
+                _jobOffer.OfferedPay = 0;
+            }
+        }
+
         public DateTime DateValue
         {
             get => JobOffer.CommencementDate.GetValueOrDefault();
@@ -48,6 +60,13 @@ namespace JobApp.Shared.ViewModels
         }
 
         public string ContactName => JobOffer.Contact?.Name ?? "<Žádný kontakt>";
+
+        public void SetContact(Contact contact)
+        {
+            _jobOffer.Contact = contact;
+            _jobOffer.ContactId = contact.Id;
+            OnPropertyChanged(nameof(ContactName));
+        }
 
         public string NearestInterviewDate
         {
@@ -81,7 +100,6 @@ namespace JobApp.Shared.ViewModels
             }
         }
 
-        // todo: use command?
         public async Task<bool> Save()
         {
             if (JobOffer.Id == default(Guid))

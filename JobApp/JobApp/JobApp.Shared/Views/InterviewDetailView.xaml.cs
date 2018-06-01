@@ -31,20 +31,11 @@ namespace JobApp.Shared.Views
 	        //throw new NotImplementedException();
 	    }
 
-	    private void Save_Action(object sender, EventArgs e)
+	    private async void Save_Action(object sender, EventArgs e)
 		{
-     //       StoreToCalendar();
-	//		throw new NotImplementedException();
+			await ViewModel.Save();
+			await Navigation.PopAsync();
 		}
 
-	    private void StoreToCalendar()
-	    {
-	        
-	    }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            ViewModel.SaveToCalendar();
-        }
-    }
+	}
 }

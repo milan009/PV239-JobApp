@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using JobApp.Shared.DatabaseServices;
+using JobApp.Shared.Events;
 using JobApp.Shared.Models;
 using JobApp.Shared.ViewModels;
 using SQLite;
@@ -13,8 +15,10 @@ namespace JobApp.Shared.Views
 	public partial class ContactDetailView : ContentPage
 	{
 	    public ContactDetailViewModel ViewModel { get; set; }
+        public delegate void SetContactOfJobOfferEventHandler(object source, AddContactEventArgs args);
+        public event SetContactOfJobOfferEventHandler AddContactToJobOffer;
 
-		public ContactDetailView(Guid? contactGuid = null)
+        public ContactDetailView(Guid? contactGuid = null)
 		{
 		    ViewModel = new ContactDetailViewModel(contactGuid);
 		    ViewModel.Loaded += OnContactLoaded;
@@ -28,10 +32,11 @@ namespace JobApp.Shared.Views
 	        //throw new NotImplementedException();
 	    }
 
-	    private void Save_Action(object sender, EventArgs e)
+	    private async void Save_Action(object sender, EventArgs e)
 	    {
-	       // Repository.TryUpdateContactAsync(ViewModel.DataModel);
-	        //throw new NotImplementedException();
-		}
+            await ViewModel.Save();
+            AddContactToJobOffer?.Invoke(this, new AddContactEventArgs(ViewModel.DataModel));
+            await Navigation.PopAsync();
+        }
 	}
 }
