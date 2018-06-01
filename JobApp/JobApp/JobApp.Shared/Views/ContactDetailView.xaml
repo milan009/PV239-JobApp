@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:JobApp.Shared.Models;assembly=JobApp.Android"
+             xmlns:validators="clr-namespace:JobApp.Shared.Validators"
              x:Class="JobApp.Shared.Views.ContactDetailView"
              Title="Detail kontaktu">
 
-	<ContentPage.ToolbarItems>
-		<ToolbarItem Order="Primary" Priority="0" Text="Save" Icon="save.png" Clicked="Save_Action"/>
-	</ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
 
 	<ContentPage.Content >
         <Grid Padding="15">
@@ -52,7 +52,13 @@
                    Keyboard="Email"
                    Grid.Row="2" 
                    Grid.Column="1"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   x:Name="email"
+            >
+                <Entry.Behaviors>
+                    <validators:EmailValidatorBehavior x:Name="emailValidator"/>
+                </Entry.Behaviors>
+            </Entry>
 
             <Label Text="Telefón" 
                    Grid.Row="3" 
@@ -62,7 +68,36 @@
                    Keyboard="Telephone"
                    Grid.Row="3" 
                    Grid.Column="1"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   x:Name="phone"
+            >
+                <Entry.Behaviors>
+                    <validators:PhoneValidatorBehavior x:Name="phoneValidator"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Button
+               Text="Save contact"
+               Clicked="Save_Action"
+               Grid.Row="4" 
+               Grid.Column="1"
+               IsEnabled="True"
+               VerticalOptions="Center"
+            >
+                <Button.Triggers>
+                    <MultiTrigger TargetType="Button">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition 
+                                Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}"
+                                Value="False" />
+                            <BindingCondition 
+                                Binding="{Binding Source={x:Reference phoneValidator}, Path=IsValid}"
+                                Value="False" />
+                        </MultiTrigger.Conditions>
+
+                        <Setter Property="IsEnabled" Value="False" />
+                    </MultiTrigger>
+                </Button.Triggers>
+            </Button>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
